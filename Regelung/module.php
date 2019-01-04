@@ -21,6 +21,8 @@ class HeizungssteuerungRegler extends IPSModule
 			$this->RegisterVariableFloat("AT_4h", "Aussentemperatur +4h", "~Temperature", 8);
 			$this->RegisterVariableFloat("AT_8h", "Aussentemperatur +8h", "~Temperature", 9);
 			$this->RegisterVariableBoolean("ZP_Conf", "ZP_Confort", "~Switch", 11);
+			$this->RegisterVariableBoolean("SWS_Abw", "Abwesenheit", "~Switch", 12);
+			$this->RegisterVariableBoolean("Abw", "Abwesend", "~Switch", 15);
 			
 			//___Modulvariabeln______________________________________________________________________
 			$this->RegisterPropertyInteger("prog", 0);
