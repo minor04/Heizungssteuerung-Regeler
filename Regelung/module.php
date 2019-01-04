@@ -168,7 +168,7 @@ class HeizungssteuerungRegler extends IPSModule
 		//}  
 		
 	}
-	public function Calculate(){
+	public function SWRegler(){
 		
 		$program = $this->getValue("prog");
 		$sollwert = $this->getValue("SW");
