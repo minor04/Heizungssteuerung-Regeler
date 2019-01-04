@@ -1,0 +1,22 @@
+{
+	"elements":
+	[
+		{ "type": "SelectVariable", "name": "InputTriggerID_01", "caption": "InputTriggerID_01" },
+		{ "type": "SelectVariable", "name": "InputTriggerID_02", "caption": "InputTriggerID_02" },
+		{ "type": "Label", "label": "Konfigurationsdaten für den Wetterdienst" },
+		{ "type": "ValidationTextBox", "name": "APIkey", "caption": "API Key" },
+		{ "type": "ValidationTextBox", "name": "Lat", "caption": "Latitude" },
+		{ "type": "ValidationTextBox", "name": "Long", "caption": "Longitude" },
+		{ "type": "Label", "label": "Intervall zu Aktualisierung der Wetterdaten" },
+		{ "type": "IntervalBox", "name": "UpdateWeatherInterval", "caption": "Minutes" },
+		{ "type": "CheckBox", "name": "WetterForcast", "caption": "Forcast Aussentemperaturen in Regelmodul Anzeigen" }
+	],
+	"actions":
+	[
+		{ "type": "Button", "label": "ZP", "onClick": "WID_ZeitPro($id);" },
+		{ "type": "Button", "label": "Test", "onClick": "WID_Test($id);" },
+		{ "type": "Button", "label": "Start Var", "onClick": "WID_VariabelProfilProgramm($id);" },
+		{ "type": "Button", "label": "Wetter", "onClick": "WID_UpdateWeatherData($id);" }
+		
+	]
+}
