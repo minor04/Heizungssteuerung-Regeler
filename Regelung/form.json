@@ -14,8 +14,8 @@
 	"actions":
 	[
 		{ "type": "Button", "label": "ZP", "onClick": "MIN_ZeitPro($id);" },
-		{ "type": "Button", "label": "Test", "onClick": "MIN_Test($id);" },
 		{ "type": "Button", "label": "Set VarPro", "onClick": "MIN_VariabelProfilProgramm($id);" },
+		{ "type": "Button", "label": "Test", "onClick": "MIN_Test($id);" },
 		{ "type": "Button", "label": "Wetter", "onClick": "MIN_UpdateWeatherData($id);" }
 		
 	]
