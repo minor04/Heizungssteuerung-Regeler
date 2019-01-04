@@ -140,7 +140,7 @@ class HeizungssteuerungRegler extends IPSModule
 		
 			$KategorieID_Heizung = IPS_GetCategoryIDByName("Heizung", 0);
 			$KategorieID_Settings = IPS_GetCategoryIDByName("Einstellungen", $KategorieID_Heizung);
-			$InstanzID = IPS_GetInstanceIDByName("Formatierung", $KategorieID_Settings);
+			$InstanzID = IPS_GetInstanceIDByName("HeizungssteuerungRegler", $KategorieID_Settings);
 			
 			$EreignisID =IPS_CreateEvent(2);
 			IPS_SetName($EreignisID, "Zeitschaltprogramm");
