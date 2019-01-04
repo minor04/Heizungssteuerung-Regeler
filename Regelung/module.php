@@ -20,6 +20,7 @@ class HeizungssteuerungRegler extends IPSModule
 			$this->RegisterVariableFloat("AT_2h", "Aussentemperatur +2h", "~Temperature", 7);
 			$this->RegisterVariableFloat("AT_4h", "Aussentemperatur +4h", "~Temperature", 8);
 			$this->RegisterVariableFloat("AT_8h", "Aussentemperatur +8h", "~Temperature", 9);
+			$this->RegisterVariableBoolean("ZP_Conf", "ZP_Confort", "~Switch", 11);
 			
 			//___Modulvariabeln______________________________________________________________________
 			$this->RegisterPropertyInteger("prog", 0);
@@ -162,6 +163,8 @@ class HeizungssteuerungRegler extends IPSModule
 			IPS_SetEventScheduleGroupPoint($EreignisID, 1, 10, 0, 0, 0, 0); //Um 0:00 Aktion mit ID 0 "Eco" aufrufen
 			IPS_SetEventScheduleGroupPoint($EreignisID, 1, 11, 7, 0, 0, 1); //Um 7:00 Aktion mit ID 1 "Comfort" aufrufen
 			IPS_SetEventScheduleGroupPoint($EreignisID, 1, 12, 22, 0, 0, 0); //Um 22:00 Aktion mit ID 0 "Eco" aufrufen
+		
+			IPS_SetHidden($this->GetIDForIdent("ZP_Conf"), true);
 		
 			
 	
