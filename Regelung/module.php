@@ -214,7 +214,7 @@ class HeizungssteuerungRegler extends IPSModule
 		
 			$KategorieID_Heizung = IPS_GetCategoryIDByName("Heizung", 0);
 			$KategorieID_Settings = IPS_GetCategoryIDByName("Einstellungen", $KategorieID_Heizung);
-			$InstanzID = IPS_GetInstanceIDByName("Formatierung", $KategorieID_Settings);
+			$InstanzID = IPS_GetInstanceIDByName("Regler", $KategorieID_Settings);
 			
 			$EreignisID =IPS_CreateEvent(1);
 			IPS_SetName($EreignisID, "Abwesend");
