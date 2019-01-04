@@ -1,7 +1,7 @@
 {
     "id": "{9042403c-246b-4116-b4a2-e35f12179c8c}",
 	"author": "Minor",
-	"name": "Heizungssteuerung-Regler",
+	"name": "HeizungssteuerungRegler",
 	"url": "www.ip-symcon.de",
 	"compatibility": {
 		"version": "4.2"
