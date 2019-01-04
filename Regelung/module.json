@@ -1,6 +1,6 @@
 {
     "id": "{05d1f922-21c6-4107-b8ee-ad2dea73c788}",
-    "name": "Heizungssteuerung_Regler",
+    "name": "HeizungssteuerungRegler",
     "type": 3,
     "vendor": "",
     "aliases": 
@@ -10,5 +10,5 @@
     "parentRequirements": [],
     "childRequirements": [],
     "implemented": [],
-    "prefix": "WID"
+    "prefix": "MIN"
 }
