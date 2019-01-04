@@ -151,8 +151,8 @@ class HeizungssteuerungRegler extends IPSModule
 			IPS_SetEventScheduleGroup($EreignisID, 0, 31); //Mo - Fr (1 + 2 + 4 + 8 + 16)
 			IPS_SetEventScheduleGroup($EreignisID, 1, 96); //Sa + So (32 + 64)
 			
-			IPS_SetEventScheduleAction($EreignisID, 0, "Eco", 0xFF8080, "SetValue(13876, 1);}");
-			IPS_SetEventScheduleAction($EreignisID, 1, "Confort", 0xFF0000, "SetValue(13876, 2);}");
+			IPS_SetEventScheduleAction($EreignisID, 0, "Eco", 0xFF8080, "SetValue(36402, false);}");
+			IPS_SetEventScheduleAction($EreignisID, 1, "Confort", 0xFF0000, "SetValue(36402, true);}");
 		
 			IPS_SetEventScheduleGroupPoint($EreignisID, 0, 0, 0, 0, 0, 0); //Um 0:00 Aktion mit ID 0 "Eco" aufrufen
 			IPS_SetEventScheduleGroupPoint($EreignisID, 0, 1, 6, 0, 0, 1); //Um 6:00 Aktion mit ID 1 "Comfort" aufrufen
