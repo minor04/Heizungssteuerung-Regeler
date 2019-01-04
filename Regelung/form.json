@@ -13,10 +13,10 @@
 	],
 	"actions":
 	[
-		{ "type": "Button", "label": "ZP", "onClick": "WID_ZeitPro($id);" },
-		{ "type": "Button", "label": "Test", "onClick": "WID_Test($id);" },
-		{ "type": "Button", "label": "Start Var", "onClick": "WID_VariabelProfilProgramm($id);" },
-		{ "type": "Button", "label": "Wetter", "onClick": "WID_UpdateWeatherData($id);" }
+		{ "type": "Button", "label": "ZP", "onClick": "MIN_ZeitPro($id);" },
+		{ "type": "Button", "label": "Test", "onClick": "MIN_Test($id);" },
+		{ "type": "Button", "label": "Start Var", "onClick": "MIN_VariabelProfilProgramm($id);" },
+		{ "type": "Button", "label": "Wetter", "onClick": "MIN_UpdateWeatherData($id);" }
 		
 	]
 }
