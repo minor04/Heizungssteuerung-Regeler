@@ -1,5 +1,5 @@
 <?
-class Heizungssteuerung_Regler extends IPSModule
+class HeizungssteuerungRegler extends IPSModule
 	{
 		
 		public function Create()
