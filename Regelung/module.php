@@ -185,19 +185,19 @@ class HeizungssteuerungRegler extends IPSModule
 		$KategorieID_Heizung = IPS_GetCategoryIDByName("Heizung", 0);
 		$KategorieID_Settings = IPS_GetCategoryIDByName("Einstellungen", $KategorieID_Heizung);
 		$InstanzID = IPS_GetInstanceIDByName("Regler", $KategorieID_Settings);
-		$VariabelID_Ab = IPS_GetVariableIDByName("Abwesend", $InstanzID);
-		//$VariabelID_An = IPS_GetVariableIDByName("Ankunft", $InstanzID);
+		$VariabelID_Ab = IPS_GetEventIDByName("Abwesend", $InstanzID);
+		$VariabelID_An = IPS_GetEventIDByName("Ankunft", $InstanzID);
 		
 		$test = $this->getValue("SWS_Abw");
 		
 		//if($this->ReadPropertyBoolean("SWS_Abw")){
 		if($test == true){
 			IPS_SetHidden($VariabelID_Ab, false);
-			//IPS_SetHidden($VariabelID_An, false);
+			IPS_SetHidden($VariabelID_An, false);
 		}
 		else{
 			IPS_SetHidden($VariabelID_Ab, true);
-			//IPS_SetHidden($VariabelID_An, true);
+			IPS_SetHidden($VariabelID_An, true);
 		}
 
 	}
