@@ -192,12 +192,12 @@ class HeizungssteuerungRegler extends IPSModule
 		
 		//if($this->ReadPropertyBoolean("SWS_Abw")){
 		if($test == true){
-			IPS_SetHidden($this->GetIDForIdent("$VariabelID_Ab"), false);
-			IPS_SetHidden($this->GetIDForIdent("$VariabelID_An"), false);
+			IPS_SetHidden($VariabelID_Ab, false);
+			//IPS_SetHidden($VariabelID_An, false);
 		}
 		else{
-			IPS_SetHidden($this->GetIDForIdent("$VariabelID_Ab"), true);
-			IPS_SetHidden($this->GetIDForIdent("$VariabelID_An"), true);
+			IPS_SetHidden($VariabelID_Ab, true);
+			//IPS_SetHidden($VariabelID_An, true);
 		}
 
 	}
@@ -241,7 +241,7 @@ class HeizungssteuerungRegler extends IPSModule
          
 	}
 	
-		public function Test(){
+	public function Test(){
 		
 			$KategorieID_Heizung = IPS_GetCategoryIDByName("Heizung", 0);
 			$KategorieID_Settings = IPS_GetCategoryIDByName("Einstellungen", $KategorieID_Heizung);
