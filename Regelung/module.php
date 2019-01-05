@@ -14,7 +14,7 @@ class HeizungssteuerungRegler extends IPSModule
 			$this->RegisterVariableInteger("SWS", "Softwareschalter", "Heizung_SWS", 1);
 			$this->RegisterVariableInteger("prog", "Programm", "Heizung_Programm", 2);
 			$this->RegisterVariableFloat("SW", "Sollwert", "~Temperature", 3);
-			$this->RegisterVariableFloat("SW_Ab", "Sollwert Absenkung", "~Temperature.Difference", 4);
+			$this->RegisterVariableFloat("SW_Abw", "Sollwert Absenkung", "~Temperature.Difference", 4);
 			$this->RegisterVariableFloat("SW_ber", "Sollwert Berechnet", "~Temperature.Room", 5);
 			$this->RegisterVariableFloat("AT", "Aussentemperatur", "~Temperature", 6);
 			$this->RegisterVariableFloat("AT_2h", "Aussentemperatur +2h", "~Temperature", 7);
@@ -27,7 +27,7 @@ class HeizungssteuerungRegler extends IPSModule
 			//___Modulvariabeln______________________________________________________________________
 			$this->RegisterPropertyInteger("prog", 0);
 			$this->RegisterPropertyFloat("SW", 22);
-			$this->RegisterPropertyFloat("SW_Ab", 3);
+			$this->RegisterPropertyFloat("SW_Abw", 3);
 			$this->RegisterPropertyInteger("UpdateWeatherInterval", 30);
 			$this->RegisterPropertyString("APIkey", 0);
 			$this->RegisterPropertyFloat("Lat", 0);
@@ -182,16 +182,20 @@ class HeizungssteuerungRegler extends IPSModule
 		
 	public function ProgrammAuswahl(){
 		
+		$sws = $this->getValue("SWS");
+		$zp_conf = $this->getValue("ZP_Conf");
+		$sws_abw = $this->getValue("SWS_Abw");
+		$abw = $this->getValue("Abw");
+		
+		
 		$KategorieID_Heizung = IPS_GetCategoryIDByName("Heizung", 0);
 		$KategorieID_Settings = IPS_GetCategoryIDByName("Einstellungen", $KategorieID_Heizung);
 		$InstanzID = IPS_GetInstanceIDByName("Regler", $KategorieID_Settings);
 		$VariabelID_Ab = IPS_GetEventIDByName("Abwesend", $InstanzID);
 		$VariabelID_An = IPS_GetEventIDByName("Ankunft", $InstanzID);
 		
-		$test = $this->getValue("SWS_Abw");
-		
-		//if($this->ReadPropertyBoolean("SWS_Abw")){
-		if($test == true){
+				
+		if($sws_ab == true){
 			IPS_SetHidden($VariabelID_Ab, false);
 			IPS_SetHidden($VariabelID_An, false);
 		}
@@ -206,7 +210,7 @@ class HeizungssteuerungRegler extends IPSModule
 		
 		$program = $this->getValue("prog");
 		$sollwert = $this->getValue("SW");
-		$sollwert_ab = $this->getValue("SW_Ab");
+		$sollwert_ab = $this->getValue("SW_Abw");
 		
 		$AT = $this->getValue("AT");
 		$AT_2 = $this->getValue("AT_2h");
