@@ -181,20 +181,20 @@ class HeizungssteuerungRegler extends IPSModule
 		
 	public function ProgrammAuswahl(){
 		
-		$KategorieID_Heizung = IPS_GetCategoryIDByName("Heizung", 0);
-		$KategorieID_Settings = IPS_GetCategoryIDByName("Einstellungen", $KategorieID_Heizung);
-		$InstanzID = IPS_GetInstanceIDByName("Regler", $KategorieID_Settings);
-		$VariabelID_Ab = IPS_GetVariableIDByName("Abwesend", $InstanzID);
-		$VariabelID_An = IPS_GetVariableIDByName("Ankunft", $InstanzID);
+		//$KategorieID_Heizung = IPS_GetCategoryIDByName("Heizung", 0);
+		//$KategorieID_Settings = IPS_GetCategoryIDByName("Einstellungen", $KategorieID_Heizung);
+		//$InstanzID = IPS_GetInstanceIDByName("Regler", $KategorieID_Settings);
+		//$VariabelID_Ab = IPS_GetVariableIDByName("Abwesend", $InstanzID);
+		//$VariabelID_An = IPS_GetVariableIDByName("Ankunft", $InstanzID);
 		
-		if($this->ReadPropertyBoolean("SWS_Abw")){
-			IPS_SetHidden($this->GetIDForIdent("$VariabelID_Ab"), false);
-			IPS_SetHidden($this->GetIDForIdent("$VariabelID_An"), false);
-		}
-		else{
-			IPS_SetHidden($this->GetIDForIdent("$VariabelID_Ab"), true);
-			IPS_SetHidden($this->GetIDForIdent("$VariabelID_An"), true);
-		}
+		//if($this->ReadPropertyBoolean("SWS_Abw")){
+			//IPS_SetHidden($this->GetIDForIdent("$VariabelID_Ab"), false);
+			//IPS_SetHidden($this->GetIDForIdent("$VariabelID_An"), false);
+		//}
+		//else{
+			//IPS_SetHidden($this->GetIDForIdent("$VariabelID_Ab"), true);
+			//IPS_SetHidden($this->GetIDForIdent("$VariabelID_An"), true);
+		//}
 
 		
 	}
