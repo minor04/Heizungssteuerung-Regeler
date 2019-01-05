@@ -51,14 +51,21 @@ class HeizungssteuerungRegler extends IPSModule
 			$triggerID_02 = $this->ReadPropertyInteger("InputTriggerID_02");
             		$this->RegisterMessage($triggerID_01, 10603 /* VM_UPDATE */);
 			$this->RegisterMessage($triggerID_02, 10603 /* VM_UPDATE */);
+			
+			$triggerID_Abw = $this->ReadPropertyBoolean("SWS_Abw");
+			$this->RegisterMessage($triggerID_Abw, 10603 /* VM_UPDATE */);
         	}
 	
 	        public function MessageSink ($TimeStamp, $SenderID, $Message, $Data) {
 			$triggerID_01 = $this->ReadPropertyInteger("InputTriggerID_01");
 			$triggerID_02 = $this->ReadPropertyInteger("InputTriggerID_02");
+			$triggerID_Abw = $this->ReadPropertyBoolean("SWS_Abw");
             		if (($SenderID == ($triggerID_01 || $triggerID_02)) && ($Message == 10603) && (boolval($Data[0]))) {
-                	$this->SWRegler();
-            }
+                		$this->SWRegler();
+           		}
+			else if (($SenderID == $triggerID_Abw) && ($Message == 10603) && (boolval($Data[0]))) {
+                		$this->ProgrammAuswahl();
+           		}
         }
         /**
         * Die folgenden Funktionen stehen automatisch zur Verfügung, wenn das Modul über die "Module Control" eingefügt wurden.
