@@ -263,7 +263,11 @@ class HeizungssteuerungRegler extends IPSModule
 		$AT_4 = $this->getValue("AT_4h");
 		$AT_8 = $this->getValue("AT_8h");
 			
-			
+
+			//_________________Heizung_Eco__________________________________________________
+			if ($program == 0) {
+				$sollwert_ber = 0;
+                	} 
 			//_________________Heizung_Eco__________________________________________________
 			if ($program == 1) {
 				$sollwert_ber = ($sollwert - $sollwert_ab);
