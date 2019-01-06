@@ -9,7 +9,7 @@ class HeizungssteuerungRegler extends IPSModule
 			//___Triger_Variabeln____________________________________________________________________
 			$this->RegisterPropertyInteger("InputTriggerID_01", 0);
 			$this->RegisterPropertyInteger("InputTriggerID_02", 0);
-			//$this->RegisterPropertyBoolean("SWS_Abw", 0);
+			$this->RegisterPropertyBoolean("SWS_Abw", 0);
 			
 			//___In_IPS_zurverfügungstehende_Variabeln_______________________________________________
 			$this->RegisterVariableInteger("SWS", "Softwareschalter", "Heizung_SWS", 1);
@@ -50,17 +50,17 @@ class HeizungssteuerungRegler extends IPSModule
 			//Sollwert Triger
             		$triggerID_01 = $this->ReadPropertyInteger("InputTriggerID_01");
 			$triggerID_02 = $this->ReadPropertyInteger("InputTriggerID_02");
-			//$triggerID_Abw = $this->ReadPropertyBoolean("SWS_Abw");
+			$triggerID_Abw = $this->ReadPropertyBoolean("SWS_Abw");
             		$this->RegisterMessage($triggerID_01, 10603 /* VM_UPDATE */);
 			$this->RegisterMessage($triggerID_02, 10603 /* VM_UPDATE */);
-			//$this->RegisterMessage($triggerID_Abw, 10603 /* VM_UPDATE */);
+			$this->RegisterMessage($triggerID_Abw, 10603 /* VM_UPDATE */);
 
         	}
 	
 	        public function MessageSink ($TimeStamp, $SenderID, $Message, $Data) {
 			$triggerID_01 = $this->ReadPropertyInteger("InputTriggerID_01");
 			$triggerID_02 = $this->ReadPropertyInteger("InputTriggerID_02");
-			//$triggerID_Abw = $this->ReadPropertyBoolean("SWS_Abw");
+			$triggerID_Abw = $this->ReadPropertyBoolean("SWS_Abw");
             		if (($SenderID == ($triggerID_01 || $triggerID_02)) && ($Message == 10603) && (boolval($Data[0]))) {
                 		$this->SWRegler();
 				$this->ProgrammAuswahl();
