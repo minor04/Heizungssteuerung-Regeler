@@ -79,12 +79,9 @@ class HeizungssteuerungRegler extends IPSModule
 			$triggerID_06 = $this->ReadPropertyInteger("InputTriggerID_SWS_Abw");
             		$triggerID_07 = $this->ReadPropertyInteger("InputTriggerID_Abw");
             		if (($SenderID == ($triggerID_01 || $triggerID_02 || $triggerID_03 || $triggerID_04 || $triggerID_05 || $triggerID_06 || $triggerID_07)) && ($Message == 10603) && (boolval($Data[0]))) {
-                		$this->SWRegler();
+                	
 				$this->ProgrammAuswahl();
            		}
-			//else if (($SenderID == $triggerID_Abw) && ($Message == 10603) && (boolval($Data[0]))) {
-                		//$this->ProgrammAuswahl();
-           		//}
         }
         /**
         * Die folgenden Funktionen stehen automatisch zur Verfügung, wenn das Modul über die "Module Control" eingefügt wurden.
@@ -203,6 +200,7 @@ class HeizungssteuerungRegler extends IPSModule
 		$sws = $this->getValue("SWS");
 		$zp_conf = $this->getValue("ZP_Conf");
 		$abw = $this->getValue("Abw");
+		$test = $this->getValue("SWS_Abw");
 		
 		
 		$KategorieID_Heizung = IPS_GetCategoryIDByName("Heizung", 0);
@@ -211,7 +209,7 @@ class HeizungssteuerungRegler extends IPSModule
 		$VariabelID_Ab = IPS_GetEventIDByName("Abwesend", $InstanzID);
 		$VariabelID_An = IPS_GetEventIDByName("Ankunft", $InstanzID);
 		
-		$test = $this->getValue("SWS_Abw");
+
 				
 		if($test == true){
 			IPS_SetHidden($VariabelID_Ab, false);
@@ -221,6 +219,8 @@ class HeizungssteuerungRegler extends IPSModule
 			IPS_SetHidden($VariabelID_Ab, true);
 			IPS_SetHidden($VariabelID_An, true);
 		}
+		
+			$this->SWRegler();
 
 	}
 	
