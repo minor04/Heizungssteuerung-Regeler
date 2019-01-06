@@ -223,6 +223,7 @@ class HeizungssteuerungRegler extends IPSModule
 			else{
 				SetValue($this->GetIDForIdent("prog"), 2);
 				SetDisabled("prog", true);
+				echo "Confort";
 			}
 		}
 		
