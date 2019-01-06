@@ -204,25 +204,25 @@ class HeizungssteuerungRegler extends IPSModule
 		
 		if($sws == 0){
 			SetValue($this->GetIDForIdent("prog"), 0);
-			IPS_SetDisabled("prog", true);
+			IPS_SetDisabled($this->GetIDForIdent("prog"), true);
 		}
 		else if($sws == 1){
-			IPS_SetDisabled("prog", false);
+			IPS_SetDisabled($this->GetIDForIdent("prog"), false);
 		}
 		else{
-			IPS_SetDisabled("prog", true);
+			IPS_SetDisabled($this->GetIDForIdent("prog"), true);
 			
 			if($abw == true){
 				SetValue($this->GetIDForIdent("prog"), 3);
-				IPS_SetDisabled("prog", true);
+				IPS_SetDisabled($this->GetIDForIdent("prog"), true);
 			}
 			else if($abw == false && $zp_conf == false){
 				SetValue($this->GetIDForIdent("prog"), 1);
-				IPS_SetDisabled("prog", true);
+				IPS_SetDisabled($this->GetIDForIdent("prog"), true);
 			}
 			else{
 				SetValue($this->GetIDForIdent("prog"), 2);
-				IPS_SetDisabled("prog", true);
+				IPS_SetDisabled($this->GetIDForIdent("prog"), true);
 				echo "Confort";
 			}
 		}
