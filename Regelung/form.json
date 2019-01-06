@@ -1,8 +1,14 @@
 {
 	"elements":
 	[
-		{ "type": "SelectVariable", "name": "InputTriggerID_01", "caption": "InputTriggerID_01" },
-		{ "type": "SelectVariable", "name": "InputTriggerID_02", "caption": "InputTriggerID_02" },
+		{ "type": "Label", "label": "Modul Trigger" },
+		{ "type": "SelectVariable", "name": "InputTriggerID_SWS", "caption": "Softwareschalter" },
+		{ "type": "SelectVariable", "name": "InputTriggerID_prog", "caption": "Programm" },
+		{ "type": "SelectVariable", "name": "InputTriggerID_SW", "caption": "Sollwert" },
+		{ "type": "SelectVariable", "name": "InputTriggerID_SW_Abs", "caption": "Sollwert Absenkung" },
+		{ "type": "SelectVariable", "name": "InputTriggerID_ZP", "caption": "ZP_Confort" },
+		{ "type": "SelectVariable", "name": "InputTriggerID_SWS_Abw", "caption": "Abwesenheit" },
+		{ "type": "SelectVariable", "name": "InputTriggerID_Abw", "caption": "Abwesend" },
 		{ "type": "Label", "label": "Konfigurationsdaten für den Wetterdienst" },
 		{ "type": "ValidationTextBox", "name": "APIkey", "caption": "API Key" },
 		{ "type": "ValidationTextBox", "name": "Lat", "caption": "Latitude" },
