@@ -81,9 +81,9 @@ class HeizungssteuerungRegler extends IPSModule
             		if (($SenderID == ($triggerID_01 || $triggerID_02 || $triggerID_05 || $triggerID_06 || $triggerID_07)) && ($Message == 10603) && (boolval($Data[0]))){
 				$this->ProgrammAuswahl();
            		}
-			if (($SenderID == ($triggerID_03 || $triggerID_04)) && ($Message == 10603) && (boolval($Data[0]))){
-				$this->SWRegler();
-           		}
+			//if (($SenderID == ($triggerID_03 || $triggerID_04)) && ($Message == 10603) && (boolval($Data[0]))){
+				//$this->SWRegler();
+           		//}
         }
         /**
         * Die folgenden Funktionen stehen automatisch zur Verfügung, wenn das Modul über die "Module Control" eingefügt wurden.
@@ -247,7 +247,7 @@ class HeizungssteuerungRegler extends IPSModule
 			IPS_SetHidden($VariabelID_An, true);
 		}
 		
-			//$this->SWRegler();
+			$this->SWRegler();
 
 	}
 	
