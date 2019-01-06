@@ -7,15 +7,19 @@ class HeizungssteuerungRegler extends IPSModule
 			//Never delete this line!
 			parent::Create();
 			//___Triger_Variabeln____________________________________________________________________
-			$this->RegisterPropertyInteger("InputTriggerID_01", 0);
-			$this->RegisterPropertyInteger("InputTriggerID_02", 0);
-			$this->RegisterPropertyBoolean("SWS_Abw", 0);
+			$this->RegisterPropertyInteger("InputTriggerID_SWS", 0);
+			$this->RegisterPropertyInteger("InputTriggerID_prog", 0);
+			$this->RegisterPropertyInteger("InputTriggerID_SW", 0);
+			$this->RegisterPropertyInteger("InputTriggerID_SW_Abs", 0);
+			$this->RegisterPropertyInteger("InputTriggerID_ZP", 0);
+			$this->RegisterPropertyInteger("InputTriggerID_SWS_Abw", 0);
+			$this->RegisterPropertyInteger("InputTriggerID_Abw", 0);
 			
 			//___In_IPS_zurverfügungstehende_Variabeln_______________________________________________
 			$this->RegisterVariableInteger("SWS", "Softwareschalter", "Heizung_SWS", 1);
 			$this->RegisterVariableInteger("prog", "Programm", "Heizung_Programm", 2);
 			$this->RegisterVariableFloat("SW", "Sollwert", "~Temperature", 3);
-			$this->RegisterVariableFloat("SW_Abw", "Sollwert Absenkung", "~Temperature.Difference", 4);
+			$this->RegisterVariableFloat("SW_Abs", "Sollwert Absenkung", "~Temperature.Difference", 4);
 			$this->RegisterVariableFloat("SW_ber", "Sollwert Berechnet", "~Temperature.Room", 5);
 			$this->RegisterVariableFloat("AT", "Aussentemperatur", "~Temperature", 6);
 			$this->RegisterVariableFloat("AT_2h", "Aussentemperatur +2h", "~Temperature", 7);
@@ -28,7 +32,7 @@ class HeizungssteuerungRegler extends IPSModule
 			//___Modulvariabeln______________________________________________________________________
 			$this->RegisterPropertyInteger("prog", 0);
 			$this->RegisterPropertyFloat("SW", 22);
-			$this->RegisterPropertyFloat("SW_Abw", 3);
+			$this->RegisterPropertyFloat("SW_Abs", 3);
 			$this->RegisterPropertyInteger("UpdateWeatherInterval", 30);
 			$this->RegisterPropertyString("APIkey", 0);
 			$this->RegisterPropertyFloat("Lat", 0);
@@ -48,20 +52,33 @@ class HeizungssteuerungRegler extends IPSModule
 			$this->SetTimerInterval("UpdateWeather", $this->ReadPropertyInteger("UpdateWeatherInterval")*1000*60);
 			
 			//Sollwert Triger
-            		$triggerID_01 = $this->ReadPropertyInteger("InputTriggerID_01");
-			$triggerID_02 = $this->ReadPropertyInteger("InputTriggerID_02");
-			$triggerID_Abw = $this->ReadPropertyBoolean("SWS_Abw");
+            		$triggerID_01 = $this->ReadPropertyInteger("InputTriggerID_SWS");
+			$triggerID_02 = $this->ReadPropertyInteger("InputTriggerID_prog");
+            		$triggerID_03 = $this->ReadPropertyInteger("InputTriggerID_SW");
+			$triggerID_04 = $this->ReadPropertyInteger("InputTriggerID_SW_Abs");
+            		$triggerID_05 = $this->ReadPropertyInteger("InputTriggerID_ZP");
+			$triggerID_06 = $this->ReadPropertyInteger("InputTriggerID_SWS_Abw");
+            		$triggerID_07 = $this->ReadPropertyInteger("InputTriggerID_Abw");
+	
             		$this->RegisterMessage($triggerID_01, 10603 /* VM_UPDATE */);
 			$this->RegisterMessage($triggerID_02, 10603 /* VM_UPDATE */);
-			$this->RegisterMessage($triggerID_Abw, 10603 /* VM_UPDATE */);
+			$this->RegisterMessage($triggerID_03, 10603 /* VM_UPDATE */);
+            		$this->RegisterMessage($triggerID_04, 10603 /* VM_UPDATE */);
+			$this->RegisterMessage($triggerID_05, 10603 /* VM_UPDATE */);
+			$this->RegisterMessage($triggerID_06, 10603 /* VM_UPDATE */);
+			$this->RegisterMessage($triggerID_07, 10603 /* VM_UPDATE */);
 
         	}
 	
 	        public function MessageSink ($TimeStamp, $SenderID, $Message, $Data) {
-			$triggerID_01 = $this->ReadPropertyInteger("InputTriggerID_01");
-			$triggerID_02 = $this->ReadPropertyInteger("InputTriggerID_02");
-			$triggerID_Abw = $this->ReadPropertyBoolean("SWS_Abw");
-            		if (($SenderID == ($triggerID_01 || $triggerID_02)) && ($Message == 10603) && (boolval($Data[0]))) {
+            		$triggerID_01 = $this->ReadPropertyInteger("InputTriggerID_SWS");
+			$triggerID_02 = $this->ReadPropertyInteger("InputTriggerID_prog");
+            		$triggerID_03 = $this->ReadPropertyInteger("InputTriggerID_SW");
+			$triggerID_04 = $this->ReadPropertyInteger("InputTriggerID_SW_Abs");
+            		$triggerID_05 = $this->ReadPropertyInteger("InputTriggerID_ZP");
+			$triggerID_06 = $this->ReadPropertyInteger("InputTriggerID_SWS_Abw");
+            		$triggerID_07 = $this->ReadPropertyInteger("InputTriggerID_Abw");
+            		if (($SenderID == ($triggerID_01 || $triggerID_02 || $triggerID_03 || $triggerID_04 || $triggerID_05 || $triggerID_06 || $triggerID_07)) && ($Message == 10603) && (boolval($Data[0]))) {
                 		$this->SWRegler();
 				$this->ProgrammAuswahl();
            		}
@@ -211,7 +228,7 @@ class HeizungssteuerungRegler extends IPSModule
 		
 		$program = $this->getValue("prog");
 		$sollwert = $this->getValue("SW");
-		$sollwert_ab = $this->getValue("SW_Abw");
+		$sollwert_ab = $this->getValue("SW_Abs");
 		
 		$AT = $this->getValue("AT");
 		$AT_2 = $this->getValue("AT_2h");
