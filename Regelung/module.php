@@ -209,7 +209,7 @@ class HeizungssteuerungRegler extends IPSModule
 		else if($sws == 1){
 			SetDisabled("prog", false);
 		}
-		else($sws == 9){
+		else{
 			SetDisabled("prog", true);
 			
 			if($abw == true){
