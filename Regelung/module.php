@@ -9,7 +9,7 @@ class HeizungssteuerungRegler extends IPSModule
 			//___Triger_Variabeln____________________________________________________________________
 			$this->RegisterPropertyInteger("InputTriggerID_01", 0);
 			$this->RegisterPropertyInteger("InputTriggerID_02", 0);
-			$this->RegisterPropertyInteger("SWS_Abw", 0);
+			$this->RegisterPropertyBoolean("SWS_Abw", 0);
 			
 			//___In_IPS_zurverfügungstehende_Variabeln_______________________________________________
 			$this->RegisterVariableInteger("SWS", "Softwareschalter", "Heizung_SWS", 1);
