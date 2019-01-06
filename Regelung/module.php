@@ -53,7 +53,7 @@ class HeizungssteuerungRegler extends IPSModule
 			
 			//Sollwert Triger
             		$triggerID_01 = $this->ReadPropertyInteger("InputTriggerID_SWS");
-			$triggerID_02 = $this->ReadPropertyInteger("InputTriggerID_prog");
+			//$triggerID_02 = $this->ReadPropertyInteger("InputTriggerID_prog");
             		//$triggerID_03 = $this->ReadPropertyInteger("InputTriggerID_SW");
 			//$triggerID_04 = $this->ReadPropertyInteger("InputTriggerID_SW_Abs");
             		$triggerID_05 = $this->ReadPropertyInteger("InputTriggerID_ZP");
@@ -61,7 +61,7 @@ class HeizungssteuerungRegler extends IPSModule
             		$triggerID_07 = $this->ReadPropertyInteger("InputTriggerID_Abw");
 	
             		$this->RegisterMessage($triggerID_01, 10603 /* VM_UPDATE */);
-			$this->RegisterMessage($triggerID_02, 10603 /* VM_UPDATE */);
+			//$this->RegisterMessage($triggerID_02, 10603 /* VM_UPDATE */);
 			//$this->RegisterMessage($triggerID_03, 10603 /* VM_UPDATE */);
             		//$this->RegisterMessage($triggerID_04, 10603 /* VM_UPDATE */);
 			$this->RegisterMessage($triggerID_05, 10603 /* VM_UPDATE */);
@@ -72,7 +72,7 @@ class HeizungssteuerungRegler extends IPSModule
 	
 	        public function MessageSink ($TimeStamp, $SenderID, $Message, $Data) {
             		$triggerID_01 = $this->ReadPropertyInteger("InputTriggerID_SWS");
-			$triggerID_02 = $this->ReadPropertyInteger("InputTriggerID_prog");
+			//$triggerID_02 = $this->ReadPropertyInteger("InputTriggerID_prog");
             		//$triggerID_03 = $this->ReadPropertyInteger("InputTriggerID_SW");
 			//$triggerID_04 = $this->ReadPropertyInteger("InputTriggerID_SW_Abs");
             		$triggerID_05 = $this->ReadPropertyInteger("InputTriggerID_ZP");
