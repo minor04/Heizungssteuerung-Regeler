@@ -202,6 +202,30 @@ class HeizungssteuerungRegler extends IPSModule
 		$abw = $this->getValue("Abw");
 		$test = $this->getValue("SWS_Abw");
 		
+		if($sws == 0){
+			SetValue($this->GetIDForIdent("prog"), 0);
+			SetDisabled("prog", true);
+		}
+		else if($sws == 1){
+			SetDisabled("prog", false);
+		}
+		else($sws == 9){
+			SetDisabled("prog", true);
+			
+			if($abw == true){
+				SetValue($this->GetIDForIdent("prog"), 3);
+				SetDisabled("prog", true);
+			}
+			else if($abw == false && $zp_conf == false){
+				SetValue($this->GetIDForIdent("prog"), 1);
+				SetDisabled("prog", true);
+			}
+			else{
+				SetValue($this->GetIDForIdent("prog"), 2);
+				SetDisabled("prog", true);
+			}
+		}
+		
 		
 		$KategorieID_Heizung = IPS_GetCategoryIDByName("Heizung", 0);
 		$KategorieID_Settings = IPS_GetCategoryIDByName("Einstellungen", $KategorieID_Heizung);
