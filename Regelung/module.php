@@ -39,8 +39,6 @@ class HeizungssteuerungRegler extends IPSModule
 			$this->RegisterPropertyFloat("Long", 0);
 			$this->RegisterPropertyBoolean("WetterForcast", true);
 			
-			$this->RegisterPropertyBoolean("ZP_Conf", true);
-			
 			
 			//Timer erstellen
 			$this->RegisterTimer("UpdateWeather", $this->ReadPropertyInteger("UpdateWeatherInterval"), 'WID_UpdateWeatherData($_IPS[\'TARGET\']);');
@@ -201,10 +199,10 @@ class HeizungssteuerungRegler extends IPSModule
 		
 	public function ProgrammAuswahl(){
 		
-		$sws = $this->getValue("SWS");
-		$zp_conf = $this->getValue("ZP_Conf");
-		$abw = $this->getValue("Abw");
-		$test = $this->getValue("SWS_Abw");
+		$sws = $this->getValue($this->GetIDForIdent("SWS"));
+		$zp_conf = $this->getValue($this->GetIDForIdent("ZP_Conf"));
+		$abw = $this->getValue($this->GetIDForIdent("Abw"));
+		$test = $this->getValue($this->GetIDForIdent("SWS_Abw"));
 		
 		if($sws == 0){
 			SetValue($this->GetIDForIdent("prog"), 0);
