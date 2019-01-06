@@ -39,6 +39,8 @@ class HeizungssteuerungRegler extends IPSModule
 			$this->RegisterPropertyFloat("Long", 0);
 			$this->RegisterPropertyBoolean("WetterForcast", true);
 			
+			$this->RegisterPropertyBoolean("ZP_Conf", true);
+			
 			
 			//Timer erstellen
 			$this->RegisterTimer("UpdateWeather", $this->ReadPropertyInteger("UpdateWeatherInterval"), 'WID_UpdateWeatherData($_IPS[\'TARGET\']);');
