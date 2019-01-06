@@ -78,9 +78,11 @@ class HeizungssteuerungRegler extends IPSModule
             		$triggerID_05 = $this->ReadPropertyInteger("InputTriggerID_ZP");
 			$triggerID_06 = $this->ReadPropertyInteger("InputTriggerID_SWS_Abw");
             		$triggerID_07 = $this->ReadPropertyInteger("InputTriggerID_Abw");
-            		if (($SenderID == ($triggerID_01 || $triggerID_02 || $triggerID_03 || $triggerID_04 || $triggerID_05 || $triggerID_06 || $triggerID_07)) && ($Message == 10603) && (boolval($Data[0]))) {
-                	
+            		if (($SenderID == ($triggerID_01 || $triggerID_02 || $triggerID_05 || $triggerID_06 || $triggerID_07)) && ($Message == 10603) && (boolval($Data[0]))){
 				$this->ProgrammAuswahl();
+           		}
+			if (($SenderID == ($triggerID_03 || $triggerID_04)) && ($Message == 10603) && (boolval($Data[0]))){
+				$this->SWRegler();
            		}
         }
         /**
