@@ -53,7 +53,7 @@ class HeizungssteuerungRegler extends IPSModule
 			//$triggerID_Abw = $this->ReadPropertyBoolean("SWS_Abw");
             		$this->RegisterMessage($triggerID_01, 10603 /* VM_UPDATE */);
 			$this->RegisterMessage($triggerID_02, 10603 /* VM_UPDATE */);
-			$this->RegisterMessage($triggerID_Abw, 10603 /* VM_UPDATE */);
+			//$this->RegisterMessage($triggerID_Abw, 10603 /* VM_UPDATE */);
 
         	}
 	
