@@ -10,7 +10,7 @@ class HeizungssteuerungRegler extends IPSModule
 			//___In_IPS_zurverfügungstehende_Variabeln_______________________________________________
 			$this->RegisterVariableInteger("SWS", "Softwareschalter", "Heizung_SWS", 1);
 			$this->RegisterVariableInteger("prog", "Programm", "Heizung_Programm", 2);
-			$this->RegisterVariableFloat("SW", "Sollwert", "~Temperature", 3);
+			$this->RegisterVariableFloat("SW", "Sollwert", "~Temperature.Room", 3);
 			$this->RegisterVariableFloat("SW_Abs", "Sollwert Absenkung", "~Temperature.Difference", 4);
 			$this->RegisterVariableFloat("SW_ber", "Sollwert Berechnet", "~Temperature.Room", 5);
 			$this->RegisterVariableFloat("AT", "Aussentemperatur", "~Temperature", 6);
