@@ -1,14 +1,6 @@
 {
 	"elements":
 	[
-		{ "type": "Label", "label": "Modul Trigger" },
-		{ "type": "SelectVariable", "name": "InputTriggerID_SWS", "caption": "Softwareschalter" },
-		{ "type": "SelectVariable", "name": "InputTriggerID_prog", "caption": "Programm" },
-		{ "type": "SelectVariable", "name": "InputTriggerID_SW", "caption": "Sollwert" },
-		{ "type": "SelectVariable", "name": "InputTriggerID_SW_Abs", "caption": "Sollwert Absenkung" },
-		{ "type": "SelectVariable", "name": "InputTriggerID_ZP", "caption": "ZP_Confort" },
-		{ "type": "SelectVariable", "name": "InputTriggerID_SWS_Abw", "caption": "Abwesenheit" },
-		{ "type": "SelectVariable", "name": "InputTriggerID_Abw", "caption": "Abwesend" },
 		{ "type": "Label", "label": "Konfigurationsdaten für den Wetterdienst" },
 		{ "type": "ValidationTextBox", "name": "APIkey", "caption": "API Key" },
 		{ "type": "ValidationTextBox", "name": "Lat", "caption": "Latitude" },
@@ -22,7 +14,7 @@
 		{ "type": "Button", "label": "ZP", "onClick": "MIN_ZeitPro($id);" },
 		{ "type": "Button", "label": "Set VarPro", "onClick": "MIN_VariabelProfilProgramm($id);" },
 		{ "type": "Button", "label": "Test", "onClick": "MIN_Test($id);" },
-		{ "type": "Button", "label": "Wetter / Temp", "onClick": "MIN_ProgrammAuswahl($id);" }
+		{ "type": "Button", "label": "Wetter", "onClick": "MIN_ProgrammAuswahl($id);" }
 		
 	]
 }
