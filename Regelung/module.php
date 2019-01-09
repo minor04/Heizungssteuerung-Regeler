@@ -294,7 +294,6 @@ class HeizungssteuerungRegler extends IPSModule
 	
 	public function Test(){
 		
-		//$this->EnableAction("SWS");
 		$this->EnableAction("ZP_Conf");
 		$this->EnableAction("SW_Abs");
 		
