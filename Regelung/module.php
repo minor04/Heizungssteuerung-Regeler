@@ -129,6 +129,15 @@ class HeizungssteuerungRegler extends IPSModule
 			echo "Das Variabelprofil". "'Heizung_SWS'". "ist bereits vorhanden";
 		}
 	}
+	
+	public function VariabelStandartaktion(){
+		
+		$this->EnableAction("SWS");
+		$this->EnableAction("prog");
+		$this->EnableAction("SW");
+		
+
+	}
 		
 	public function ZeitPro(){
 		
@@ -285,9 +294,9 @@ class HeizungssteuerungRegler extends IPSModule
 	
 	public function Test(){
 		
-		$this->EnableAction("SWS");
-		$this->EnableAction("prog");
-		$this->EnableAction("SW");
+		//$this->EnableAction("SWS");
+		$this->EnableAction("ZP_Conf");
+		$this->EnableAction("SW_Abs");
 		
 
 		
