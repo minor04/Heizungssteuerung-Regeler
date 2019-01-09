@@ -22,9 +22,14 @@ class HeizungssteuerungRegler extends IPSModule
 			$this->RegisterVariableBoolean("Abw", "Abwesend", "~Switch", 15);
 			
 			//___Modulvariabeln______________________________________________________________________
+			$this->RegisterPropertyInteger("SWS", 0);
 			$this->RegisterPropertyInteger("prog", 0);
 			$this->RegisterPropertyFloat("SW", 22);
 			$this->RegisterPropertyFloat("SW_Abs", 3);
+			$this->RegisterPropertyBoolean("ZP_Conf", true);
+			$this->RegisterPropertyBoolean("Abw", true);
+			
+			
 			$this->RegisterPropertyInteger("UpdateWeatherInterval", 30);
 			$this->RegisterPropertyString("APIkey", 0);
 			$this->RegisterPropertyFloat("Lat", 0);
@@ -280,25 +285,39 @@ class HeizungssteuerungRegler extends IPSModule
 	
 	public function Test(){
 		
-			$KategorieID_Heizung = IPS_GetCategoryIDByName("Heizung", 0);
-			$KategorieID_Settings = IPS_GetCategoryIDByName("Einstellungen", $KategorieID_Heizung);
-			$InstanzID = IPS_GetInstanceIDByName("Regler", $KategorieID_Settings);
-			
-			$EreignisID =IPS_CreateEvent(1);
-			IPS_SetName($EreignisID, "Abwesend");
-			IPS_SetParent($EreignisID, $InstanzID);
-			IPS_SetPosition($EreignisID, 12);
-			IPS_SetEventCyclic($EreignisID, 1 /* Täglich */ ,5,0,0,0,0);
-			
-			$EreignisID =IPS_CreateEvent(1);
-			IPS_SetName($EreignisID, "Ankunft");
-			IPS_SetParent($EreignisID, $InstanzID);
-			IPS_SetPosition($EreignisID, 13);
-			IPS_SetEventCyclic($EreignisID, 1 /* Täglich */ ,5,0,0,0,0);
-			
-			IPS_SetHidden($this->GetIDForIdent("Abw"), true);
+
 		
 	}
+
+	    
+	public function RequestAction($key, $value){
+		
+        	switch ($key) {
+        	//case 'COLOR_TEMPERATURE':
+        		case 'SWS':
+			case 'SW':	
+	    		$this->ProgrammAuswahl();
+	    		//$this->SetValue('SW_Ab', 0);
+	    		$value = $value;
+				
+       
+            	break;
+        		case 'prog':
+       			//case 'TRIG':
+        		//case 'SATURATION':
+        		//case 'BRIGHTNESS':
+        		//case 'TEMPERATURE':
+        		//case 'ILLUMINATION':
+        		//case 'BATTERY':
+			$this->SWRegler();
+	    		//$this->SetValue('SW_Ab', 2);
+            		$value = $value;
+            	break;
+        	}
+		
+        $this->SetValue($key, $value);	
+		
+   	}
 		   
     }
 ?>
