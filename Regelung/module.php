@@ -5,16 +5,7 @@ class HeizungssteuerungRegler extends IPSModule
 		public function Create()
 		{
 			//Never delete this line!
-			parent::Create();
-			//___Triger_Variabeln____________________________________________________________________
-			$this->RegisterPropertyInteger("InputTriggerID_SWS", 0);
-			$this->RegisterPropertyInteger("InputTriggerID_prog", 0);
-			$this->RegisterPropertyInteger("InputTriggerID_SW", 0);
-			$this->RegisterPropertyInteger("InputTriggerID_SW_Abs", 0);
-			$this->RegisterPropertyInteger("InputTriggerID_ZP", 0);
-			$this->RegisterPropertyInteger("InputTriggerID_SWS_Abw", 0);
-			$this->RegisterPropertyInteger("InputTriggerID_Abw", 0);
-			
+			parent::Create();	
 			
 			//___In_IPS_zurverfügungstehende_Variabeln_______________________________________________
 			$this->RegisterVariableInteger("SWS", "Softwareschalter", "Heizung_SWS", 1);
@@ -52,37 +43,13 @@ class HeizungssteuerungRegler extends IPSModule
 			//Timerzeit setzen in Minuten
 			$this->SetTimerInterval("UpdateWeather", $this->ReadPropertyInteger("UpdateWeatherInterval")*1000*60);
 			
-			//Sollwert Triger
-            		$triggerID_01 = $this->ReadPropertyInteger("InputTriggerID_SWS");
-			//$triggerID_02 = $this->ReadPropertyInteger("InputTriggerID_prog");
-            		//$triggerID_03 = $this->ReadPropertyInteger("InputTriggerID_SW");
-			//$triggerID_04 = $this->ReadPropertyInteger("InputTriggerID_SW_Abs");
-            		$triggerID_05 = $this->ReadPropertyInteger("InputTriggerID_ZP");
-			$triggerID_06 = $this->ReadPropertyInteger("InputTriggerID_SWS_Abw");
-            		$triggerID_07 = $this->ReadPropertyInteger("InputTriggerID_Abw");
-	
-            		$this->RegisterMessage($triggerID_01, 10603 /* VM_UPDATE */);
-			//$this->RegisterMessage($triggerID_02, 10603 /* VM_UPDATE */);
-			//$this->RegisterMessage($triggerID_03, 10603 /* VM_UPDATE */);
-            		//$this->RegisterMessage($triggerID_04, 10603 /* VM_UPDATE */);
-			$this->RegisterMessage($triggerID_05, 10603 /* VM_UPDATE */);
-			$this->RegisterMessage($triggerID_06, 10603 /* VM_UPDATE */);
-			$this->RegisterMessage($triggerID_07, 10603 /* VM_UPDATE */);
 
         	}
 	
 	        public function MessageSink ($TimeStamp, $SenderID, $Message, $Data) {
-            		$triggerID_01 = $this->ReadPropertyInteger("InputTriggerID_SWS");
-			//$triggerID_02 = $this->ReadPropertyInteger("InputTriggerID_prog");
-            		//$triggerID_03 = $this->ReadPropertyInteger("InputTriggerID_SW");
-			//$triggerID_04 = $this->ReadPropertyInteger("InputTriggerID_SW_Abs");
-            		$triggerID_05 = $this->ReadPropertyInteger("InputTriggerID_ZP");
-			$triggerID_06 = $this->ReadPropertyInteger("InputTriggerID_SWS_Abw");
-            		$triggerID_07 = $this->ReadPropertyInteger("InputTriggerID_Abw");
-            		if (($SenderID == ($triggerID_01 || $triggerID_05 || $triggerID_06 || $triggerID_07)) && ($Message == 10603) && (boolval($Data[0]))){
-				$this->ProgrammAuswahl();
-           		}
-			//if (($SenderID == ($triggerID_02 || $triggerID_03 || $triggerID_04)) && ($Message == 10603) && (boolval($Data[0]))){
+            		//$triggerID_01 = $this->ReadPropertyInteger("InputTriggerID_SWS");
+	
+			//if (($SenderID == $triggerID_01) && ($Message == 10603) && (boolval($Data[0]))){
 				//$this->SWRegler();
            		//}
         }
@@ -135,7 +102,7 @@ class HeizungssteuerungRegler extends IPSModule
 			IPS_CreateVariableProfile("Heizung_Programm", 1); // 0 boolean, 1 int, 2 float, 3 string,
 			IPS_SetVariableProfileValues("Heizung_Programm", 1, 3, 1);
 			IPS_SetVariableProfileDigits("Heizung_Programm", 0);
-			IPS_SetVariableProfileAssociation("Heizung_Programm", 1, "Aus", "", 0xFFFFFF);
+			IPS_SetVariableProfileAssociation("Heizung_Programm", 0, "Aus", "", 0xFFFFFF);
 			IPS_SetVariableProfileAssociation("Heizung_Programm", 1, "Eco", "", 0xFFFFFF);
 			IPS_SetVariableProfileAssociation("Heizung_Programm", 2, "Comfort", "", 0xFFFFFF);
 			IPS_SetVariableProfileAssociation("Heizung_Programm", 3, "Abwesend", "", 0xFFFFFF);
@@ -147,11 +114,11 @@ class HeizungssteuerungRegler extends IPSModule
 		if (!IPS_VariableProfileExists("Heizung_SWS")) {
 			
 			IPS_CreateVariableProfile("Heizung_SWS", 1); // 0 boolean, 1 int, 2 float, 3 string,
-			IPS_SetVariableProfileValues("Heizung_SWS", 1, 9, 1);
+			IPS_SetVariableProfileValues("Heizung_SWS", 1, 2, 1);
 			IPS_SetVariableProfileDigits("Heizung_SWS", 0);
 			IPS_SetVariableProfileAssociation("Heizung_SWS", 0, "Aus", "", 0xFFFFFF);
 			IPS_SetVariableProfileAssociation("Heizung_SWS", 1, "Ein", "", 0xFFFFFF);
-			IPS_SetVariableProfileAssociation("Heizung_SWS", 9, "Auto", "", 0xFFFFFF);
+			IPS_SetVariableProfileAssociation("Heizung_SWS", 2, "Auto", "", 0xFFFFFF);
 		}
 		else{
 			echo "Das Variabelprofil". "'Heizung_SWS'". "ist bereits vorhanden";
@@ -193,7 +160,21 @@ class HeizungssteuerungRegler extends IPSModule
 			IPS_SetEventScheduleGroupPoint($EreignisID, 1, 11, 7, 0, 0, 1); //Um 7:00 Aktion mit ID 1 "Comfort" aufrufen
 			IPS_SetEventScheduleGroupPoint($EreignisID, 1, 12, 22, 0, 0, 0); //Um 22:00 Aktion mit ID 0 "Eco" aufrufen
 		
+		
+			$EreignisID =IPS_CreateEvent(1);
+			IPS_SetName($EreignisID, "Abwesend");
+			IPS_SetParent($EreignisID, $InstanzID);
+			IPS_SetPosition($EreignisID, 12);
+			IPS_SetEventCyclic($EreignisID, 1 /* Täglich */ ,5,0,0,0,0);
+			
+			$EreignisID =IPS_CreateEvent(1);
+			IPS_SetName($EreignisID, "Ankunft");
+			IPS_SetParent($EreignisID, $InstanzID);
+			IPS_SetPosition($EreignisID, 13);
+			IPS_SetEventCyclic($EreignisID, 1 /* Täglich */ ,5,0,0,0,0);
+		
 			IPS_SetHidden($this->GetIDForIdent("ZP_Conf"), true);
+			IPS_SetHidden($this->GetIDForIdent("Abw"), true);
 		
 		//}		
 	
