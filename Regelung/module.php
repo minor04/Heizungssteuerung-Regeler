@@ -317,6 +317,12 @@ class HeizungssteuerungRegler extends IPSModule
 
 		
 	}
+	
+	public function Test_2(){
+	
+	IPS_ApplyChanges(28875);
+	
+	}
 
 	    
 	public function RequestAction($key, $value){
