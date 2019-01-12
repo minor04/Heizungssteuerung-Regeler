@@ -197,29 +197,23 @@ class HeizungssteuerungRegler extends IPSModule
 		
 	public function ProgrammAuswahl(){
 		
-		$KategorieID_Heizung = IPS_GetCategoryIDByName("Heizung", 0);
-		$KategorieID_Settings = IPS_GetCategoryIDByName("Einstellungen", $KategorieID_Heizung);
-		$InstanzID = IPS_GetInstanceIDByName("Regler", $KategorieID_Settings);
-		$VariabelID = IPS_GetVariableIDByName("Softwareschalter", $InstanzID);
-		//IPS_ApplyChanges($VariabelID);
-		//IPS_ApplyChanges($this->InstanceID);
 		
 		//$sws = $this->ReadPropertyInteger("SWS");
-		//$sws = getValue($this->GetIDForIdent("SWS"));
+		$sws = getValue($this->GetIDForIdent("SWS"));
 		$zp_conf = getValue($this->GetIDForIdent("ZP_Conf"));
 		$abw = getValue($this->GetIDForIdent("Abw"));
 		$test = getValue($this->GetIDForIdent("SWS_Abw"));
 		
-		//echo $sws;
+		echo $sws;
 		
 		//IPS_ApplyChanges($this->GetIDForIdent("SWS"));
 		
-		if($this->ReadPropertyInteger('SWS') == 0){
+		if($sws == 0){
 			SetValue($this->GetIDForIdent("prog"), 0);
 			IPS_SetDisabled($this->GetIDForIdent("prog"), false);
 			echo "0";
 		}
-		else if($this->ReadPropertyInteger('SWS') == 1){
+		else if($sws == 1){
 		//else if($this->ReadPropertyInteger("SWS") == 1){
 			IPS_SetDisabled($this->GetIDForIdent("prog"), false);
 			echo "1";
