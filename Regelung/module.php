@@ -214,12 +214,12 @@ class HeizungssteuerungRegler extends IPSModule
 		
 		//IPS_ApplyChanges($this->GetIDForIdent("SWS"));
 		
-		if($this->ReadPropertyInteger('Softwareschalter') == 0){
+		if($this->ReadPropertyInteger('SWS') == 0){
 			SetValue($this->GetIDForIdent("prog"), 0);
 			IPS_SetDisabled($this->GetIDForIdent("prog"), false);
 			echo "0";
 		}
-		else if($this->ReadPropertyInteger('Softwareschalter') == 1){
+		else if($this->ReadPropertyInteger('SWS') == 1){
 		//else if($this->ReadPropertyInteger("SWS") == 1){
 			IPS_SetDisabled($this->GetIDForIdent("prog"), false);
 			echo "1";
@@ -318,7 +318,7 @@ class HeizungssteuerungRegler extends IPSModule
 		
 	}
 	
-	public function Test_2(){
+	public function Test(){
 	
 	IPS_ApplyChanges(28875);
 	
