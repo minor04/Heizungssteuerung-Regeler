@@ -48,8 +48,6 @@ class HeizungssteuerungRegler extends IPSModule
 			//Timerzeit setzen in Minuten
 			$this->SetTimerInterval("UpdateWeather", $this->ReadPropertyInteger("UpdateWeatherInterval")*1000*60);
 			
-			$this->ProgrammAuswahl();
-			
 
         	}
 	
@@ -199,6 +197,7 @@ class HeizungssteuerungRegler extends IPSModule
 		
 	public function ProgrammAuswahl(){
 		
+		IPS_ApplyChanges($this->GetIDForIdent("SWS"));
 		$sws = $this->ReadPropertyInteger("SWS");
 		//$sws = getValue($this->GetIDForIdent("SWS"));
 		$zp_conf = getValue($this->GetIDForIdent("ZP_Conf"));
@@ -318,8 +317,8 @@ class HeizungssteuerungRegler extends IPSModule
         	//case 'COLOR_TEMPERATURE':
         		case 'SWS':
 			case 'SW':
-			$this->ApplyChanges();
-	    		//$this->ProgrammAuswahl();
+			//$this->ApplyChanges();
+	    		$this->ProgrammAuswahl();
 	    		//$this->SetValue('SW_Ab', 0);
 	    		$value = $value;
 				
