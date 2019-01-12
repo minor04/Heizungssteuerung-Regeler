@@ -197,17 +197,19 @@ class HeizungssteuerungRegler extends IPSModule
 		
 	public function ProgrammAuswahl(){
 		
-		$sws = getValue($this->GetIDForIdent("SWS"));
+		//$sws = getValue($this->GetIDForIdent("SWS"));
+		$sws = $this->ReadPropertyBoolean("WetterForcast") getValue($this->GetIDForIdent("SWS"));
 		$zp_conf = getValue($this->GetIDForIdent("ZP_Conf"));
 		$abw = getValue($this->GetIDForIdent("Abw"));
 		$test = getValue($this->GetIDForIdent("SWS_Abw"));
 		
-		if($sws == 0){
+		if($this->ReadPropertyInteger("SWS") == 0){ //$sws == 0){
 			SetValue($this->GetIDForIdent("prog"), 0);
 			IPS_SetDisabled($this->GetIDForIdent("prog"), false);
 			echo "0";
 		}
-		else if($sws == 1){
+		//else if($sws == 1){
+		else if($this->ReadPropertyInteger("SWS") == 1){
 			IPS_SetDisabled($this->GetIDForIdent("prog"), false);
 			echo "1";
 		}
