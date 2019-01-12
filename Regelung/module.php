@@ -311,7 +311,7 @@ class HeizungssteuerungRegler extends IPSModule
 	public function Test(){
 		
 		//$this->EnableAction("SWS_Abw");
-		$test = $this->ReadPropertyInteger("SWS");
+		$test = $this->ReadPropertyFloat("Lat");
 		echo $test;
 		
 
