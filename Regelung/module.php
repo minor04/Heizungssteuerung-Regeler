@@ -200,7 +200,8 @@ class HeizungssteuerungRegler extends IPSModule
 		$KategorieID_Heizung = IPS_GetCategoryIDByName("Heizung", 0);
 		$KategorieID_Settings = IPS_GetCategoryIDByName("Einstellungen", $KategorieID_Heizung);
 		$InstanzID = IPS_GetInstanceIDByName("Regler", $KategorieID_Settings);
-		IPS_ApplyChanges($InstanzID);
+		$VariabelID = IPS_GetVariableIDByName("Softwareschalter", $InstanzID);
+		IPS_ApplyChanges($VariabelID);
 		//IPS_ApplyChanges($this->InstanceID);
 		
 		//$sws = $this->ReadPropertyInteger("SWS");
@@ -213,12 +214,12 @@ class HeizungssteuerungRegler extends IPSModule
 		
 		//IPS_ApplyChanges($this->GetIDForIdent("SWS"));
 		
-		if($this->ReadPropertyInteger('SWS') == 1){
+		if($this->ReadPropertyInteger('SWS') == 0){
 			SetValue($this->GetIDForIdent("prog"), 0);
 			IPS_SetDisabled($this->GetIDForIdent("prog"), false);
 			echo "0";
 		}
-		else if($this->ReadPropertyInteger('SWS') == 0){
+		else if($this->ReadPropertyInteger('SWS') == 1){
 		//else if($this->ReadPropertyInteger("SWS") == 1){
 			IPS_SetDisabled($this->GetIDForIdent("prog"), false);
 			echo "1";
