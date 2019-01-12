@@ -69,7 +69,6 @@ class HeizungssteuerungRegler extends IPSModule
 	public function UpdateWeatherData(){
 		
 		$apikey = $this->ReadPropertyString("APIkey");
-		echo $apikey;
 		$lat = $this->ReadPropertyFloat("Lat");
 		$long = $this->ReadPropertyFloat("Long");
 		
@@ -311,7 +310,9 @@ class HeizungssteuerungRegler extends IPSModule
 	
 	public function Test(){
 		
-		$this->EnableAction("SWS_Abw");
+		//$this->EnableAction("SWS_Abw");
+		$test = $this->ReadPropertyInteger("SWS");
+		echo $test;
 		
 
 		
