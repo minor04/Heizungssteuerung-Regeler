@@ -69,6 +69,7 @@ class HeizungssteuerungRegler extends IPSModule
 	public function UpdateWeatherData(){
 		
 		$apikey = $this->ReadPropertyString("APIkey");
+		echo $apikey;
 		$lat = $this->ReadPropertyFloat("Lat");
 		$long = $this->ReadPropertyFloat("Long");
 		
