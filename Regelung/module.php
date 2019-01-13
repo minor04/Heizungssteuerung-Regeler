@@ -24,7 +24,7 @@ class HeizungssteuerungRegler extends IPSModule
 			//___Modulvariabeln______________________________________________________________________
 			//$this->RegisterPropertyInteger("SWS", 1);
 			//$this->RegisterPropertyInteger("prog", 1);
-			//$this->RegisterPropertyFloat("SW", 22);
+			$this->RegisterPropertyFloat("SW", 22);
 			//$this->RegisterPropertyFloat("SW_Abs", 3);
 			//$this->RegisterPropertyBoolean("ZP_Conf", true);
 			//$this->RegisterPropertyBoolean("Abw", true);
