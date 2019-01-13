@@ -23,7 +23,7 @@ class HeizungssteuerungRegler extends IPSModule
 			
 			//___Modulvariabeln______________________________________________________________________
 			$this->RegisterPropertyInteger("SWS", 1);
-			$this->RegisterPropertyInteger("prog", 0);
+			$this->RegisterPropertyInteger("prog", 1);
 			$this->RegisterPropertyFloat("SW", 22);
 			$this->RegisterPropertyFloat("SW_Abs", 3);
 			$this->RegisterPropertyBoolean("ZP_Conf", true);
@@ -44,6 +44,9 @@ class HeizungssteuerungRegler extends IPSModule
 	        public function ApplyChanges() {
             		//Never delete this line!
             		parent::ApplyChanges();
+			
+			$sws = $this->ReadPropertyInteger("SWS");
+			$prog = $this->ReadPropertyInteger("prog");
 			
 			//Timerzeit setzen in Minuten
 			$this->SetTimerInterval("UpdateWeather", $this->ReadPropertyInteger("UpdateWeatherInterval")*1000*60);
@@ -197,7 +200,9 @@ class HeizungssteuerungRegler extends IPSModule
 		
 	public function ProgrammAuswahl(){
 		
-		$sws = getValue($this->GetIDForIdent("SWS"));
+		$sws = $this->ReadPropertyInteger("SWS");
+				
+		//$sws = getValue($this->GetIDForIdent("SWS"));
 		$zp_conf = getValue($this->GetIDForIdent("ZP_Conf"));
 		$abw = getValue($this->GetIDForIdent("Abw"));
 		$test = getValue($this->GetIDForIdent("SWS_Abw"));
@@ -258,7 +263,9 @@ class HeizungssteuerungRegler extends IPSModule
 	
 	public function SWRegler(){
 		
-		$program = $this->getValue("prog");
+		//$program = $this->getValue("prog");
+		
+		$program = $this->ReadPropertyInteger("prog");
 		$sollwert = $this->getValue("SW");
 		$sollwert_ab = $this->getValue("SW_Abs");
 		
