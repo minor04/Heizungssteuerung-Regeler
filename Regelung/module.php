@@ -69,6 +69,34 @@ class HeizungssteuerungRegler extends IPSModule
         *
         */
 	
+	public function RequestAction($key, $value){
+		
+        	switch ($key) {
+        	//case 'COLOR_TEMPERATURE':
+        		case 'SWS':
+			case 'ZP_Conf':
+			case 'Abw':
+			case 'SWS_Abw':
+			//$this->ApplyChanges();
+	    		$this->ProgrammAuswahl();
+	    		//$this->SetValue('SW_Ab', 0);
+	    		$value = $value;
+				
+       
+            	break;
+        		case 'prog':
+			case 'SW':
+			case 'SW_Abs':
+			$this->SWRegler();
+	    		//$this->SetValue('SW_Ab', 2);
+            		$value = $value;
+            	break;
+        	}
+		
+        $this->SetValue($key, $value);	
+		
+   	}
+	
 	public function UpdateWeatherData(){
 		
 		$apikey = $this->ReadPropertyString("APIkey");
@@ -200,9 +228,8 @@ class HeizungssteuerungRegler extends IPSModule
 		
 	public function ProgrammAuswahl(){
 		
-		$sws = $this->ReadPropertyInteger("SWS");
-				
-		//$sws = getValue($this->GetIDForIdent("SWS"));
+		//$sws = $this->ReadPropertyInteger("SWS");
+		$sws = getValue($this->GetIDForIdent("SWS"));
 		$zp_conf = getValue($this->GetIDForIdent("ZP_Conf"));
 		$abw = getValue($this->GetIDForIdent("Abw"));
 		$test = getValue($this->GetIDForIdent("SWS_Abw"));
@@ -263,9 +290,8 @@ class HeizungssteuerungRegler extends IPSModule
 	
 	public function SWRegler(){
 		
-		//$program = $this->getValue("prog");
-		
-		$program = $this->ReadPropertyInteger("prog");
+		$program = $this->getValue("prog");
+		//$program = $this->ReadPropertyInteger("prog");
 		$sollwert = $this->getValue("SW");
 		$sollwert_ab = $this->getValue("SW_Abs");
 		
@@ -324,33 +350,7 @@ class HeizungssteuerungRegler extends IPSModule
 	}
 
 	    
-	public function RequestAction($key, $value){
-		
-        	switch ($key) {
-        	//case 'COLOR_TEMPERATURE':
-        		case 'SWS':
-			case 'ZP_Conf':
-			case 'Abw':
-			case 'SWS_Abw':
-			//$this->ApplyChanges();
-	    		$this->ProgrammAuswahl();
-	    		//$this->SetValue('SW_Ab', 0);
-	    		$value = $value;
-				
-       
-            	break;
-        		case 'prog':
-			case 'SW':
-			case 'SW_Abs':
-			$this->SWRegler();
-	    		//$this->SetValue('SW_Ab', 2);
-            		$value = $value;
-            	break;
-        	}
-		
-        $this->SetValue($key, $value);	
-		
-   	}
+
 		   
     }
 ?>
