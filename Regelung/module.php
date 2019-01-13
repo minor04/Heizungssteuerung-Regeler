@@ -22,12 +22,12 @@ class HeizungssteuerungRegler extends IPSModule
 			$this->RegisterVariableBoolean("Abw", "Abwesend", "~Switch", 15);
 			
 			//___Modulvariabeln______________________________________________________________________
-			$this->RegisterPropertyInteger("SWS", 1);
-			$this->RegisterPropertyInteger("prog", 1);
-			$this->RegisterPropertyFloat("SW", 22);
-			$this->RegisterPropertyFloat("SW_Abs", 3);
-			$this->RegisterPropertyBoolean("ZP_Conf", true);
-			$this->RegisterPropertyBoolean("Abw", true);
+			//$this->RegisterPropertyInteger("SWS", 1);
+			//$this->RegisterPropertyInteger("prog", 1);
+			//$this->RegisterPropertyFloat("SW", 22);
+			//$this->RegisterPropertyFloat("SW_Abs", 3);
+			//$this->RegisterPropertyBoolean("ZP_Conf", true);
+			//$this->RegisterPropertyBoolean("Abw", true);
 			
 			
 			$this->RegisterPropertyInteger("UpdateWeatherInterval", 30);
