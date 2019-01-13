@@ -350,7 +350,7 @@ class HeizungssteuerungRegler extends IPSModule
 	
 	public function Test2(){
 	
-		IPS_ApplyChanges(28875);
+				$this->EnableAction("test");
 	
 	}
 
