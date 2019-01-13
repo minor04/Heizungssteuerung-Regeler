@@ -234,15 +234,15 @@ class HeizungssteuerungRegler extends IPSModule
 		if($sws == 0){
 			SetValue($this->GetIDForIdent("prog"), 0);
 			IPS_SetDisabled($this->GetIDForIdent("prog"), false);
-			echo "0";
+			//echo "0";
 		}
 		else if($sws == 1){
 			IPS_SetDisabled($this->GetIDForIdent("prog"), false);
-			echo "1";
+			//echo "1";
 		}
 		else{
 			IPS_SetDisabled($this->GetIDForIdent("prog"), true);
-			echo "2";
+			//echo "2";
 			
 			if($abw == true){
 				SetValue($this->GetIDForIdent("prog"), 3);
