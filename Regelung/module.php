@@ -197,8 +197,6 @@ class HeizungssteuerungRegler extends IPSModule
 		
 	public function ProgrammAuswahl(){
 		
-		
-		//$sws = $this->ReadPropertyInteger("SWS");
 		$sws = getValue($this->GetIDForIdent("SWS"));
 		$zp_conf = getValue($this->GetIDForIdent("ZP_Conf"));
 		$abw = getValue($this->GetIDForIdent("Abw"));
@@ -207,11 +205,11 @@ class HeizungssteuerungRegler extends IPSModule
 		if($sws == 0){
 			SetValue($this->GetIDForIdent("prog"), 0);
 			IPS_SetDisabled($this->GetIDForIdent("prog"), false);
-			echo "0";
+			//echo "0";
 		}
 		else if($sws == 1){
 			IPS_SetDisabled($this->GetIDForIdent("prog"), false);
-			echo "1";
+			//echo "1";
 		}
 		else{
 			IPS_SetDisabled($this->GetIDForIdent("prog"), true);
@@ -320,7 +318,9 @@ class HeizungssteuerungRegler extends IPSModule
         	switch ($key) {
         	//case 'COLOR_TEMPERATURE':
         		case 'SWS':
-			case 'SW':
+			case 'ZP_Conf':
+			case 'ABW':
+			case 'SWS_ABW':
 			//$this->ApplyChanges();
 	    		$this->ProgrammAuswahl();
 	    		//$this->SetValue('SW_Ab', 0);
@@ -329,12 +329,8 @@ class HeizungssteuerungRegler extends IPSModule
        
             	break;
         		case 'prog':
-       			//case 'TRIG':
-        		//case 'SATURATION':
-        		//case 'BRIGHTNESS':
-        		//case 'TEMPERATURE':
-        		//case 'ILLUMINATION':
-        		//case 'BATTERY':
+			case 'SW':
+			case 'SW_Abs':
 			$this->SWRegler();
 	    		//$this->SetValue('SW_Ab', 2);
             		$value = $value;
