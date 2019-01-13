@@ -21,6 +21,8 @@ class HeizungssteuerungRegler extends IPSModule
 			$this->RegisterVariableBoolean("SWS_Abw", "Abwesenheit", "~Switch", 12);
 			$this->RegisterVariableBoolean("Abw", "Abwesend", "~Switch", 15);
 			
+			$this->RegisterVariableBoolean("test", "Test", "~Switch", 20);
+			
 			//___Modulvariabeln______________________________________________________________________
 			//$this->RegisterPropertyInteger("SWS", 1);
 			//$this->RegisterPropertyInteger("prog", 1);
@@ -72,23 +74,22 @@ class HeizungssteuerungRegler extends IPSModule
 	public function RequestAction($key, $value){
 		
         	switch ($key) {
-        	//case 'COLOR_TEMPERATURE':
         		case 'SWS':
 			case 'ZP_Conf':
 			case 'Abw':
 			case 'SWS_Abw':
-			//$this->ApplyChanges();
-	    		$this->ProgrammAuswahl();
-	    		//$this->SetValue('SW_Ab', 0);
+			SetValue($this->GetIDForIdent("test"), 0);
+	    		//$this->ProgrammAuswahl();
 	    		$value = $value;
-				
-       
+            	break;
+        		case 'test':
+			$this->ProgrammAuswahl();
+            		$value = $value;
             	break;
         		case 'prog':
 			case 'SW':
 			case 'SW_Abs':
 			$this->SWRegler();
-	    		//$this->SetValue('SW_Ab', 2);
             		$value = $value;
             	break;
         	}
