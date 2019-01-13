@@ -45,8 +45,8 @@ class HeizungssteuerungRegler extends IPSModule
             		//Never delete this line!
             		parent::ApplyChanges();
 			
-			$sws = $this->ReadPropertyInteger("SWS");
-			$prog = $this->ReadPropertyInteger("prog");
+			//$sws = $this->ReadPropertyInteger("SWS");
+			//$prog = $this->ReadPropertyInteger("prog");
 			
 			//Timerzeit setzen in Minuten
 			$this->SetTimerInterval("UpdateWeather", $this->ReadPropertyInteger("UpdateWeatherInterval")*1000*60);
@@ -335,8 +335,8 @@ class HeizungssteuerungRegler extends IPSModule
 	public function Test(){
 		
 		//$this->EnableAction("SWS_Abw");
-		$test = $this->getValue("SW");
-		//$test = $this->ReadPropertyFloat("SW");
+		//$test = $this->getValue("SW");
+		$test = $this->ReadPropertyFloat("SW");
 		echo $test;
 		
 
@@ -345,7 +345,7 @@ class HeizungssteuerungRegler extends IPSModule
 	
 	public function Test2(){
 	
-	$this->ApplyChanges();
+		IPS_ApplyChanges(28875);
 	
 	}
 
