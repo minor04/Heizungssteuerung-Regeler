@@ -319,8 +319,8 @@ class HeizungssteuerungRegler extends IPSModule
         	//case 'COLOR_TEMPERATURE':
         		case 'SWS':
 			case 'ZP_Conf':
-			case 'ABW':
-			case 'SWS_ABW':
+			case 'Abw':
+			case 'SWS_Abw':
 			//$this->ApplyChanges();
 	    		$this->ProgrammAuswahl();
 	    		//$this->SetValue('SW_Ab', 0);
