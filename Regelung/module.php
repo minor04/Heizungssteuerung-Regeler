@@ -24,7 +24,7 @@ class HeizungssteuerungRegler extends IPSModule
 			//___Modulvariabeln______________________________________________________________________
 			//$this->RegisterPropertyInteger("SWS", 1);
 			//$this->RegisterPropertyInteger("prog", 1);
-			$this->RegisterPropertyFloat("SW", 15);
+			//$this->RegisterPropertyFloat("SW", 15);
 			//$this->RegisterPropertyFloat("SW_Abs", 3);
 			//$this->RegisterPropertyBoolean("ZP_Conf", true);
 			//$this->RegisterPropertyBoolean("Abw", true);
@@ -229,7 +229,8 @@ class HeizungssteuerungRegler extends IPSModule
 	public function ProgrammAuswahl(){
 		
 		//$sws = $this->ReadPropertyInteger("SWS");
-		$sws = getValue($this->GetIDForIdent("SWS"));
+		$sws = GetValueInteger(28663);
+		//$sws = getValue($this->GetIDForIdent("SWS"));
 		$zp_conf = getValue($this->GetIDForIdent("ZP_Conf"));
 		$abw = getValue($this->GetIDForIdent("Abw"));
 		$test = getValue($this->GetIDForIdent("SWS_Abw"));
@@ -237,15 +238,15 @@ class HeizungssteuerungRegler extends IPSModule
 		if($sws == 0){
 			SetValue($this->GetIDForIdent("prog"), 0);
 			IPS_SetDisabled($this->GetIDForIdent("prog"), false);
-			//echo "0";
+			echo "0";
 		}
 		else if($sws == 1){
 			IPS_SetDisabled($this->GetIDForIdent("prog"), false);
-			//echo "1";
+			echo "1";
 		}
 		else{
 			IPS_SetDisabled($this->GetIDForIdent("prog"), true);
-			//echo "2";
+			echo "2";
 			
 			if($abw == true){
 				SetValue($this->GetIDForIdent("prog"), 3);
