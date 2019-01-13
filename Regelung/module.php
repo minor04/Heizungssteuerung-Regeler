@@ -248,6 +248,10 @@ class HeizungssteuerungRegler extends IPSModule
 			IPS_SetHidden($VariabelID_An, true);
 		}
 		
+		if($abw == false){
+			SetValue($this->GetIDForIdent("Abw"), false);
+		}
+		
 			$this->SWRegler();
 
 	}
