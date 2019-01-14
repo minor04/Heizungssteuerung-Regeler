@@ -22,7 +22,7 @@ class HeizungssteuerungRegler extends IPSModule
 			$this->RegisterVariableBoolean("Abw", "Abwesend", "~Switch", 15);
 			
 			//___Modulvariabeln______________________________________________________________________
-			//$this->RegisterPropertyInteger("SWS", 1);
+			$this->RegisterPropertyInteger("SWS", 1);
 			//$this->RegisterPropertyInteger("prog", 1);
 			//$this->RegisterPropertyFloat("SW", 15);
 			//$this->RegisterPropertyFloat("SW_Abs", 3);
@@ -74,6 +74,7 @@ class HeizungssteuerungRegler extends IPSModule
         	switch ($key) {
         		case 'SWS':
 				$sws = $this->ReadPropertyInteger("SWS");
+				//$test = $this->ReadPropertyFloat("SW");
 				//$sws = GetValueInteger(28663);
 				echo $sws;
 			//case 'ZP_Conf':
