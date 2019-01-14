@@ -73,7 +73,8 @@ class HeizungssteuerungRegler extends IPSModule
 		
         	switch ($key) {
         		case 'SWS':
-				$sws = GetValueInteger(28663);
+				$this->RegisterPropertyInteger("SWS", 1);
+				//$sws = GetValueInteger(28663);
 				echo $sws;
 			//case 'ZP_Conf':
 			//case 'Abw':
