@@ -74,22 +74,22 @@ class HeizungssteuerungRegler extends IPSModule
         	switch ($key) {
         		case 'SWS':
 				if ($value == 0){
-					echo "10";					
+					echo "20";					
 				}
 				else if ($value == 1){
-					echo "11";	
+					echo "21";	
 				}
 				else if ($value == 2){
-					echo "11";	
+					echo "22";	
 				}
 			//$sws = $this->ReadPropertyInteger("SWS");
 			//$sws = GetValueInteger(28663);
 			//echo $sws;
-			case 'ZP_Conf':
-			case 'Abw':
-			case 'SWS_Abw':
-			$this->ProgrammAuswahl();
-	    		$value = $value;
+			//case 'ZP_Conf':
+			//case 'Abw':
+			//case 'SWS_Abw':
+			//$this->ProgrammAuswahl();
+	    		//$value = $value;
             	break;
         		case 'prog':
 			case 'SW':
