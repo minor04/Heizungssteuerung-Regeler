@@ -74,7 +74,7 @@ class HeizungssteuerungRegler extends IPSModule
         */
 	
 	public function RequestAction($key, $value){
-		
+		global $Test;
         	switch ($key) {
         		case 'SWS':
 				if ($value == 0){
