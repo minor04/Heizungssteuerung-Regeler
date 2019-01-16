@@ -76,7 +76,7 @@ class HeizungssteuerungRegler extends IPSModule
         */
 	
 	public function RequestAction($key, $value){
-		global $sws, $zp_conf, $abw ;
+		global $sws, $zp_conf, $abw;
         	switch ($key) {
         		case 'SWS':
 				
@@ -257,9 +257,9 @@ class HeizungssteuerungRegler extends IPSModule
 		//IPS_ApplyChanges(28875);
 		
 		//$sws = GetValueInteger(28663);
-		global $sws;
-		$zp_conf = getValue($this->GetIDForIdent("ZP_Conf"));
-		$abw = getValue($this->GetIDForIdent("Abw"));
+		global $sws, $zp_conf, $abw;
+		//$zp_conf = getValue($this->GetIDForIdent("ZP_Conf"));
+		//$abw = getValue($this->GetIDForIdent("Abw"));
 		$test = getValue($this->GetIDForIdent("SWS_Abw"));
 		
 		if($sws == 0){
