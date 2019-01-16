@@ -1,6 +1,8 @@
 <?
 
 $sws = 0;
+$zp_conf = true;
+$abw = false;
 	
 class HeizungssteuerungRegler extends IPSModule
 	{
@@ -74,24 +76,47 @@ class HeizungssteuerungRegler extends IPSModule
         */
 	
 	public function RequestAction($key, $value){
-		global $sws;
+		global $sws, $zp_conf, $abw ;
         	switch ($key) {
         		case 'SWS':
 				
 				$sws = $value;
+				$zp_conf = getValue($this->GetIDForIdent("ZP_Conf"));
+				$abw = getValue($this->GetIDForIdent("Abw"));
+
+				$this->ProgrammAuswahl();
+            		break;
+				
+        		case 'ZP_Conf':
+				
+				$sws = getValue($this->GetIDForIdent("SWS"));
+				$zp_conf = $value;
+				$abw = getValue($this->GetIDForIdent("Abw"));
+
+				$this->ProgrammAuswahl();
+			break;
+				
+        		case 'Abw':
+				
+				$sws = getValue($this->GetIDForIdent("SWS"));
+				$zp_conf = getValue($this->GetIDForIdent("ZP_Conf"));
+				$abw = $value;
+
+				$this->ProgrammAuswahl();
+			break;
 	
 			//echo $sws;
 			//case 'ZP_Conf':
 			//case 'Abw':
 			//case 'SWS_Abw':
-			$this->ProgrammAuswahl();
+			//$this->ProgrammAuswahl();
 
-            	break;
+            	//break;
         		case 'prog':
 			case 'SW':
 			case 'SW_Abs':
 			$this->SWRegler();
-            	break;
+            		break;
         	}
 		
         $this->SetValue($key, $value);	
