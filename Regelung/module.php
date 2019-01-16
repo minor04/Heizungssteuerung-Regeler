@@ -1,4 +1,7 @@
 <?
+
+$Test = 0;
+	
 class HeizungssteuerungRegler extends IPSModule
 	{
 		
