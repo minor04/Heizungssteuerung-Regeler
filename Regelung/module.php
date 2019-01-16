@@ -74,13 +74,13 @@ class HeizungssteuerungRegler extends IPSModule
         	switch ($key) {
         		case 'SWS':
 				if ($value == 0){
-					echo "20";					
+					$Test = 10;					
 				}
 				else if ($value == 1){
-					echo "21";	
+					$Test = 20;	
 				}
 				else if ($value == 2){
-					echo "22";	
+					$Test = 30;	
 				}
 			//$sws = $this->ReadPropertyInteger("SWS");
 			//$sws = GetValueInteger(28663);
@@ -88,14 +88,13 @@ class HeizungssteuerungRegler extends IPSModule
 			//case 'ZP_Conf':
 			//case 'Abw':
 			//case 'SWS_Abw':
-			//$this->ProgrammAuswahl();
+			$this->Test2();
 	    		//$value = $value;
             	break;
         		case 'prog':
 			case 'SW':
 			case 'SW_Abs':
 			$this->SWRegler();
-            		$value = $value;
             	break;
         	}
 		
@@ -353,8 +352,8 @@ class HeizungssteuerungRegler extends IPSModule
 		
 	}
 	
-	public function Test2(){
-	
+	public function Test2($Test){
+		echo $Test;
 				//$this->EnableAction("test");
 	
 	}
