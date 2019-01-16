@@ -352,9 +352,10 @@ class HeizungssteuerungRegler extends IPSModule
 		
 	}
 	
-	public function Test2(int $Test){
-		//echo $Test;
-				$this->EnableAction("test");
+	public function Test2(){
+		echo $Test;
+		//int $Test
+		//$this->EnableAction("test");
 	
 	}
 
