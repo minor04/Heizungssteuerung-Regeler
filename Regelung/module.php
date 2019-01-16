@@ -74,13 +74,16 @@ class HeizungssteuerungRegler extends IPSModule
         	switch ($key) {
         		case 'SWS':
 				if ($value == 0){
-					$Test = 10;					
+					$Test = 10;
+					echo $Test;
 				}
 				else if ($value == 1){
-					$Test = 20;	
+					$Test = 20;
+					echo $Test;
 				}
 				else if ($value == 2){
-					$Test = 30;	
+					$Test = 30;
+					echo $Test;
 				}
 			//$sws = $this->ReadPropertyInteger("SWS");
 			//$sws = GetValueInteger(28663);
@@ -353,7 +356,7 @@ class HeizungssteuerungRegler extends IPSModule
 	}
 	
 	public function Test2(){
-		echo $Test;
+		//echo $Test;
 		//int $Test
 		//$this->EnableAction("test");
 	
