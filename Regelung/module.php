@@ -88,7 +88,7 @@ class HeizungssteuerungRegler extends IPSModule
 			if (($SenderID == $triggerIDConf) && ($Message == 10603)){// && (boolval($Data[0]))){
 				echo $Data;
 				$sws = getValue($this->GetIDForIdent("SWS"));
-				$zp_conf = getValue($this->GetIDForIdent("ZP_Conf"));
+				$zp_conf = $Data;
 				$abw = getValue($this->GetIDForIdent("Abw"));
 				$this->ProgrammAuswahl();
            		}
