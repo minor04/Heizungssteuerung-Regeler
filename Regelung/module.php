@@ -12,7 +12,7 @@ class HeizungssteuerungRegler extends IPSModule
 			//Never delete this line!
 			parent::Create();
 			
-			
+			$this->RegisterPropertyInteger("TrigProgramm", 0);
 			
 			//___In_IPS_zurverfügungstehende_Variabeln_______________________________________________
 			$this->RegisterVariableInteger("SWS", "Softwareschalter", "Heizung_SWS", 1);
@@ -45,7 +45,7 @@ class HeizungssteuerungRegler extends IPSModule
 			$this->RegisterPropertyFloat("Long", 0);
 			$this->RegisterPropertyBoolean("WetterForcast", true);
 			//$this->RegisterPropertyInteger("InputTriggerID", true);
-			$this->RegisterPropertyInteger("TrigProgramm", 0);
+
 			//$this->RegisterPropertyInteger("TrigConfort", 0);
 			//$this->RegisterPropertyInteger("TrigAbwesend", 0);
 			
@@ -72,7 +72,7 @@ class HeizungssteuerungRegler extends IPSModule
 			//$triggerIDConf = $this->ReadPropertyInteger("TrigConfort");
 			//$triggerIDAbw = $this->ReadPropertyInteger("TrigAbwesend");
 	
-			if (($SenderID == "TrigProgramm") && ($Message == 10603)){// && (boolval($Data[0]))){
+			if (($SenderID == $triggerIDProg) && ($Message == 10603)){// && (boolval($Data[0]))){
 				//$this->SWRegler();
 				echo "20";
 				SetValue($this->GetIDForIdent("Abw"), true);				
