@@ -69,7 +69,7 @@ class HeizungssteuerungRegler extends IPSModule
 	
 	        public function MessageSink ($TimeStamp, $SenderID, $Message, $Data) {
             		$triggerIDProg = $this->ReadPropertyInteger("TrigProgramm");
-			//$triggerIDConf = $this->ReadPropertyInteger("TrigConfort");
+			$triggerIDConf = $this->ReadPropertyInteger("TrigConfort");
 			//$triggerIDAbw = $this->ReadPropertyInteger("TrigAbwesend");
 	
 			if (($SenderID == $triggerIDProg) && ($Message == 10603)){// && (boolval($Data[0]))){
@@ -77,11 +77,11 @@ class HeizungssteuerungRegler extends IPSModule
 				echo "20";
 				SetValue($this->GetIDForIdent("Abw"), true);				
            		}
-			//if (($SenderID == "TrigConfort") && ($Message == 10603)){// && (boolval($Data[0]))){
+			if (($SenderID == $triggerIDConf) && ($Message == 10603)){// && (boolval($Data[0]))){
 				//$this->SWRegler();
-				//echo "20";
-				//SetValue($this->GetIDForIdent("Abw"), false);				
-           		//}
+				echo "20";
+				SetValue($this->GetIDForIdent("Abw"), false);				
+           		}
         }
         /**
         * Die folgenden Funktionen stehen automatisch zur Verfügung, wenn das Modul über die "Module Control" eingefügt wurden.
