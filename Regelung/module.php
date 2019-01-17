@@ -46,7 +46,7 @@ class HeizungssteuerungRegler extends IPSModule
 			$this->RegisterPropertyBoolean("WetterForcast", true);
 			//$this->RegisterPropertyInteger("InputTriggerID", true);
 
-			//$this->RegisterPropertyInteger("TrigConfort", 0);
+			$this->RegisterPropertyInteger("TrigConfort", 0);
 			//$this->RegisterPropertyInteger("TrigAbwesend", 0);
 			
 			
