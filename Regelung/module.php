@@ -61,11 +61,12 @@ class HeizungssteuerungRegler extends IPSModule
         	}
 	
 	        public function MessageSink ($TimeStamp, $SenderID, $Message, $Data) {
-            		$triggerID = $this->ReadPropertyInteger("ZP_Conf");
+            		$triggerID = $this->ReadPropertyBoolean("ZP_Conf");
 	
 			if (($SenderID == $triggerID) && ($Message == 10603)){// && (boolval($Data[0]))){
 				//$this->SWRegler();
 				echo "20";
+				SetValue($this->GetIDForIdent("Abw"), true);
 				
 				
            		}
