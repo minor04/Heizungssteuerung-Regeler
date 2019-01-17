@@ -12,7 +12,7 @@ class HeizungssteuerungRegler extends IPSModule
 			//Never delete this line!
 			parent::Create();
 			
-			$this->RegisterPropertyBoolean("ZP_Conf", true);
+			
 			
 			//___In_IPS_zurverfügungstehende_Variabeln_______________________________________________
 			$this->RegisterVariableInteger("SWS", "Softwareschalter", "Heizung_SWS", 1);
@@ -30,6 +30,7 @@ class HeizungssteuerungRegler extends IPSModule
 			
 			//___Modulvariabeln______________________________________________________________________
 			$this->RegisterPropertyInteger("SWS", 1);
+			$this->RegisterPropertyBoolean("ZP_Conf", true);
 			//$this->RegisterPropertyInteger("Test", 0);
 			//$this->RegisterPropertyInteger("prog", 1);
 			//$this->RegisterPropertyFloat("SW", 15);
@@ -53,7 +54,7 @@ class HeizungssteuerungRegler extends IPSModule
             		//Never delete this line!
             		parent::ApplyChanges();
 			
-            		$triggerID = $this->ReadPropertyBoolean("ZP_Conf");
+            		$triggerID = $this->ReadPropertyBoolean("InputTriggerID");
             		$this->RegisterMessage($triggerID, 10603 /* VM_UPDATE */);
 			
 			//Timerzeit setzen in Minuten
@@ -63,7 +64,7 @@ class HeizungssteuerungRegler extends IPSModule
         	}
 	
 	        public function MessageSink ($TimeStamp, $SenderID, $Message, $Data) {
-            		$triggerID = $this->ReadPropertyBoolean("ZP_Conf");
+            		$triggerID = $this->ReadPropertyBoolean("InputTriggerID");
 	
 			if (($SenderID == $triggerID) && ($Message == 10603)){// && (boolval($Data[0]))){
 				//$this->SWRegler();
