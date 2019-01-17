@@ -44,6 +44,7 @@ class HeizungssteuerungRegler extends IPSModule
 			$this->RegisterPropertyFloat("Lat", 0);
 			$this->RegisterPropertyFloat("Long", 0);
 			$this->RegisterPropertyBoolean("WetterForcast", true);
+			$this->RegisterPropertyBoolean("InputTriggerID", true);
 			
 			
 			//Timer erstellen
