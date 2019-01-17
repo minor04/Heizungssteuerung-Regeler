@@ -122,7 +122,7 @@ class HeizungssteuerungRegler extends IPSModule
 				
         		case 'prog':
 				$prog = $value;
-				$sw =  = getValue($this->GetIDForIdent("SW"));
+				$sw = getValue($this->GetIDForIdent("SW"));
 				$sw_abs = getValue($this->GetIDForIdent("SW_Abs"));
 				$this->SWRegler();
 			break;
