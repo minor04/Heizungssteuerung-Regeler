@@ -291,7 +291,7 @@ class HeizungssteuerungRegler extends IPSModule
 		global $sws, $zp_conf, $abw;
 		//$zp_conf = getValue($this->GetIDForIdent("ZP_Conf"));
 		//$abw = getValue($this->GetIDForIdent("Abw"));
-		//$test = getValue($this->GetIDForIdent("SWS_Abw"));
+		$test = getValue($this->GetIDForIdent("SWS_Abw"));
 		
 		if($sws == 0){
 			SetValue($this->GetIDForIdent("prog"), 0);
