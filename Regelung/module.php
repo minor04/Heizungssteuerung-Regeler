@@ -58,8 +58,8 @@ class HeizungssteuerungRegler extends IPSModule
             		//Never delete this line!
             		parent::ApplyChanges();
 			
-            		$triggerID = $this->ReadPropertyInteger("TrigProgramm");
-            		$this->RegisterMessage($triggerID, 10603 /* VM_UPDATE */);
+            		$triggerIDProg = $this->ReadPropertyInteger("TrigProgramm");
+            		$this->RegisterMessage($triggerIDProg, 10603 /* VM_UPDATE */);
 			
 			//Timerzeit setzen in Minuten
 			$this->SetTimerInterval("UpdateWeather", $this->ReadPropertyInteger("UpdateWeatherInterval")*1000*60);
@@ -77,7 +77,7 @@ class HeizungssteuerungRegler extends IPSModule
 				echo "20";
 				SetValue($this->GetIDForIdent("Abw"), true);				
            		}
-			if (($SenderID == "$triggerIDConf") && ($Message == 10603)){// && (boolval($Data[0]))){
+			if (($SenderID == "TrigConfort") && ($Message == 10603)){// && (boolval($Data[0]))){
 				//$this->SWRegler();
 				echo "20";
 				SetValue($this->GetIDForIdent("Abw"), false);				
