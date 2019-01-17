@@ -61,7 +61,7 @@ class HeizungssteuerungRegler extends IPSModule
             		$triggerIDProg = $this->ReadPropertyInteger("TrigProgramm");
             		$this->RegisterMessage($triggerIDProg, 10603 /* VM_UPDATE */);
 			
-			$triggerIDConf = $this->ReadPropertyInteger("TrigProgramm");
+			$triggerIDConf = $this->ReadPropertyInteger("TrigConfort");
 			$this->RegisterMessage($triggerIDConf, 10603 /* VM_UPDATE */);
 			
 			//Timerzeit setzen in Minuten
