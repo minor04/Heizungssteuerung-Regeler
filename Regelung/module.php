@@ -44,7 +44,7 @@ class HeizungssteuerungRegler extends IPSModule
 			$this->RegisterPropertyFloat("Lat", 0);
 			$this->RegisterPropertyFloat("Long", 0);
 			$this->RegisterPropertyBoolean("WetterForcast", true);
-			$this->RegisterPropertyBoolean("InputTriggerID", true);
+			$this->RegisterPropertyInteger("InputTriggerID", true);
 			
 			
 			//Timer erstellen
@@ -55,7 +55,7 @@ class HeizungssteuerungRegler extends IPSModule
             		//Never delete this line!
             		parent::ApplyChanges();
 			
-            		$triggerID = $this->ReadPropertyBoolean("InputTriggerID");
+            		$triggerID = $this->ReadPropertyInteger("InputTriggerID");
             		$this->RegisterMessage($triggerID, 10603 /* VM_UPDATE */);
 			
 			//Timerzeit setzen in Minuten
@@ -65,7 +65,7 @@ class HeizungssteuerungRegler extends IPSModule
         	}
 	
 	        public function MessageSink ($TimeStamp, $SenderID, $Message, $Data) {
-            		$triggerID = $this->ReadPropertyBoolean("InputTriggerID");
+            		$triggerID = $this->ReadPropertyInteger("InputTriggerID");
 	
 			if (($SenderID == $triggerID) && ($Message == 10603)){// && (boolval($Data[0]))){
 				//$this->SWRegler();
