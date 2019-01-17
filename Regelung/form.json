@@ -2,7 +2,6 @@
 	"elements":
 	[
 		{ "type": "SelectVariable", "name": "TrigProgramm", "caption": "Programm" },
-
 		{ "type": "Label", "label": "Konfigurationsdaten für den Wetterdienst" },
 		{ "type": "ValidationTextBox", "name": "APIkey", "caption": "API Key" },
 		{ "type": "ValidationTextBox", "name": "Lat", "caption": "Latitude" },
