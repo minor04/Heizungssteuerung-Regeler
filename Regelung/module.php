@@ -79,19 +79,22 @@ class HeizungssteuerungRegler extends IPSModule
 			$triggerIDAbw = $this->ReadPropertyInteger("TrigAbwesend");
 	
 			if (($SenderID == $triggerIDProg) && ($Message == 10603)){// && (boolval($Data[0]))){
-				//$this->SWRegler();
-				echo "20";
-				SetValue($this->GetIDForIdent("SWS_Abw"), true);				
+				//$sws = $value;
+				//$zp_conf = getValue($this->GetIDForIdent("ZP_Conf"));
+				//$abw = getValue($this->GetIDForIdent("Abw"));
+				$this->SWRegler();
            		}
 			if (($SenderID == $triggerIDConf) && ($Message == 10603)){// && (boolval($Data[0]))){
-				//$this->SWRegler();
-				echo "20";
-				SetValue($this->GetIDForIdent("SWS_Abw"), false);				
+				$sws = getValue($this->GetIDForIdent("SWS"));
+				$zp_conf = $Data;
+				$abw = getValue($this->GetIDForIdent("Abw"));
+				$this->ProgrammAuswahl();
            		}
 			if (($SenderID == $triggerIDAbw) && ($Message == 10603)){// && (boolval($Data[0]))){
-				//$this->SWRegler();
-				echo "20";
-				SetValue($this->GetIDForIdent("SWS_Abw"), false);				
+				$sws = getValue($this->GetIDForIdent("SWS"));
+				$zp_conf = getValue($this->GetIDForIdent("ZP_Conf"));
+				$abw = $Data;
+				$this->ProgrammAuswahl();
            		}
         }
         /**
@@ -287,7 +290,7 @@ class HeizungssteuerungRegler extends IPSModule
 		global $sws, $zp_conf, $abw;
 		//$zp_conf = getValue($this->GetIDForIdent("ZP_Conf"));
 		//$abw = getValue($this->GetIDForIdent("Abw"));
-		$test = getValue($this->GetIDForIdent("SWS_Abw"));
+		//$test = getValue($this->GetIDForIdent("SWS_Abw"));
 		
 		if($sws == 0){
 			SetValue($this->GetIDForIdent("prog"), 0);
