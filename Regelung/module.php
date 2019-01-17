@@ -10,7 +10,9 @@ class HeizungssteuerungRegler extends IPSModule
 		public function Create()
 		{
 			//Never delete this line!
-			parent::Create();	
+			parent::Create();
+			
+			$this->RegisterPropertyBoolean("ZP_Conf", true);
 			
 			//___In_IPS_zurverfügungstehende_Variabeln_______________________________________________
 			$this->RegisterVariableInteger("SWS", "Softwareschalter", "Heizung_SWS", 1);
@@ -32,7 +34,7 @@ class HeizungssteuerungRegler extends IPSModule
 			//$this->RegisterPropertyInteger("prog", 1);
 			//$this->RegisterPropertyFloat("SW", 15);
 			//$this->RegisterPropertyFloat("SW_Abs", 3);
-			$this->RegisterPropertyBoolean("ZP_Conf", true);
+			
 			//$this->RegisterPropertyBoolean("Abw", true);
 			
 			
@@ -51,11 +53,11 @@ class HeizungssteuerungRegler extends IPSModule
             		//Never delete this line!
             		parent::ApplyChanges();
 			
-			//$sws = $this->ReadPropertyInteger("SWS");
-			//$prog = $this->ReadPropertyInteger("prog");
+            		$triggerID = $this->ReadPropertyBoolean("ZP_Conf");
+            		$this->RegisterMessage($triggerID, 10603 /* VM_UPDATE */);
 			
 			//Timerzeit setzen in Minuten
-			$this->SetTimerInterval("UpdateWeather", $this->ReadPropertyInteger("UpdateWeatherInterval")*1000*60);
+			//$this->SetTimerInterval("UpdateWeather", $this->ReadPropertyInteger("UpdateWeatherInterval")*1000*60);
 			
 
         	}
