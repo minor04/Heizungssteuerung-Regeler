@@ -1,7 +1,7 @@
 {
 	"elements":
 	[
-		{ "type": "SelectVariable", "name": "InputTriggerID", "caption": "Input Sensor" },
+		{ "type": "SelectVariable", "name": "ZP_Conf", "caption": "Input Sensor" },
 		{ "type": "Label", "label": "Konfigurationsdaten für den Wetterdienst" },
 		{ "type": "ValidationTextBox", "name": "APIkey", "caption": "API Key" },
 		{ "type": "ValidationTextBox", "name": "Lat", "caption": "Latitude" },
