@@ -3,6 +3,10 @@
 $sws = 0;
 $zp_conf = true;
 $abw = false;
+
+$prog = 2;
+$sw = 22;
+$sw_abs = 22;
 	
 class HeizungssteuerungRegler extends IPSModule
 	{
@@ -74,15 +78,15 @@ class HeizungssteuerungRegler extends IPSModule
         	}
 	
 	        public function MessageSink ($TimeStamp, $SenderID, $Message, $Data) {
-		global $sws, $zp_conf, $abw;
+		global $sws, $zp_conf, $abw, $prog, $sw, $sw_abs;
             		$triggerIDProg = $this->ReadPropertyInteger("TrigProgramm");
 			$triggerIDConf = $this->ReadPropertyInteger("TrigConfort");
 			$triggerIDAbw = $this->ReadPropertyInteger("TrigAbwesend");
 	
 			if (($SenderID == $triggerIDProg) && ($Message == 10603)){// && (boolval($Data[0]))){
-				//$sws = $value;
-				//$zp_conf = getValue($this->GetIDForIdent("ZP_Conf"));
-				//$abw = getValue($this->GetIDForIdent("Abw"));
+				$prog = getValue($this->GetIDForIdent("prog"));
+				$sw = getValue($this->GetIDForIdent("SW"));
+				$sw_abs = getValue($this->GetIDForIdent("SW_Abs"));
 				$this->SWRegler();
            		}
 			if (($SenderID == $triggerIDConf) && ($Message == 10603)){// && (boolval($Data[0]))){
@@ -107,47 +111,36 @@ class HeizungssteuerungRegler extends IPSModule
         */
 	
 	public function RequestAction($key, $value){
-		global $sws, $zp_conf, $abw;
+		global $sws, $zp_conf, $abw, $prog, $sw, $sw_abs;
         	switch ($key) {
         		case 'SWS':
-				
 				$sws = $value;
 				$zp_conf = getValue($this->GetIDForIdent("ZP_Conf"));
 				$abw = getValue($this->GetIDForIdent("Abw"));
-
 				$this->ProgrammAuswahl();
             		break;
 				
-        		case 'ZP_Conf':
-				
-				$sws = getValue($this->GetIDForIdent("SWS"));
-				$zp_conf = $value;
-				$abw = getValue($this->GetIDForIdent("Abw"));
-
-				$this->ProgrammAuswahl();
-			break;
-				
-        		case 'Abw':
-				
-				$sws = getValue($this->GetIDForIdent("SWS"));
-				$zp_conf = getValue($this->GetIDForIdent("ZP_Conf"));
-				$abw = $value;
-
-				$this->ProgrammAuswahl();
-			break;
-	
-			//echo $sws;
-			//case 'ZP_Conf':
-			//case 'Abw':
-			//case 'SWS_Abw':
-			//$this->ProgrammAuswahl();
-
-            	//break;
         		case 'prog':
-			case 'SW':
-			case 'SW_Abs':
-			$this->SWRegler();
-            		break;
+				$prog = $value;
+				$sw =  = getValue($this->GetIDForIdent("SW"));
+				$sw_abs = getValue($this->GetIDForIdent("SW_Abs"));
+				$this->SWRegler();
+			break;
+				
+        		case 'SW':
+				$prog = getValue($this->GetIDForIdent("prog"));
+				$sw = $value;
+				$sw_abs = getValue($this->GetIDForIdent("SW_Abs"));
+				$this->SWRegler();
+			break;
+				
+        		case 'SW_Abs':
+				$prog = getValue($this->GetIDForIdent("prog"));
+				$sw = getValue($this->GetIDForIdent("SW"));
+				$sw_abs = $value;
+				$this->SWRegler();
+			break;
+
         	}
 		
         $this->SetValue($key, $value);	
@@ -285,12 +278,8 @@ class HeizungssteuerungRegler extends IPSModule
 		
 	public function ProgrammAuswahl(){
 		
-		//IPS_ApplyChanges(28875);
-		
-		//$sws = GetValueInteger(28663);
+
 		global $sws, $zp_conf, $abw;
-		//$zp_conf = getValue($this->GetIDForIdent("ZP_Conf"));
-		//$abw = getValue($this->GetIDForIdent("Abw"));
 		$test = getValue($this->GetIDForIdent("SWS_Abw"));
 		
 		if($sws == 0){
@@ -344,16 +333,15 @@ class HeizungssteuerungRegler extends IPSModule
 			SetValue($this->GetIDForIdent("SWS_Abw"), false);
 		}
 		
-			$this->SWRegler();
+			//$this->SWRegler();
 
 	}
 	
 	public function SWRegler(){
-		
-		$program = $this->getValue("prog");
-		//$program = $this->ReadPropertyInteger("prog");
-		$sollwert = $this->getValue("SW");
-		$sollwert_ab = $this->getValue("SW_Abs");
+		global $prog, $sw, $sw_abs;
+		$program = $prog;
+		$sollwert = $sw;
+		$sollwert_ab = $sw_abs;
 		
 		$AT = $this->getValue("AT");
 		$AT_2 = $this->getValue("AT_2h");
