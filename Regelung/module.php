@@ -47,7 +47,7 @@ class HeizungssteuerungRegler extends IPSModule
 			//$this->RegisterPropertyInteger("InputTriggerID", true);
 
 			$this->RegisterPropertyInteger("TrigConfort", 0);
-			//$this->RegisterPropertyInteger("TrigAbwesend", 0);
+			$this->RegisterPropertyInteger("TrigAbwesend", 0);
 			
 			
 			//Timer erstellen
@@ -64,6 +64,9 @@ class HeizungssteuerungRegler extends IPSModule
 			$triggerIDConf = $this->ReadPropertyInteger("TrigConfort");
 			$this->RegisterMessage($triggerIDConf, 10603 /* VM_UPDATE */);
 			
+			$triggerIDAbw = $this->ReadPropertyInteger("TrigAbwesend");
+			$this->RegisterMessage($triggerIDAbw, 10603 /* VM_UPDATE */);
+			
 			//Timerzeit setzen in Minuten
 			$this->SetTimerInterval("UpdateWeather", $this->ReadPropertyInteger("UpdateWeatherInterval")*1000*60);
 			
@@ -73,17 +76,22 @@ class HeizungssteuerungRegler extends IPSModule
 	        public function MessageSink ($TimeStamp, $SenderID, $Message, $Data) {
             		$triggerIDProg = $this->ReadPropertyInteger("TrigProgramm");
 			$triggerIDConf = $this->ReadPropertyInteger("TrigConfort");
-			//$triggerIDAbw = $this->ReadPropertyInteger("TrigAbwesend");
+			$triggerIDAbw = $this->ReadPropertyInteger("TrigAbwesend");
 	
 			if (($SenderID == $triggerIDProg) && ($Message == 10603)){// && (boolval($Data[0]))){
 				//$this->SWRegler();
 				echo "20";
-				SetValue($this->GetIDForIdent("Abw"), true);				
+				SetValue($this->GetIDForIdent("SWS_Abw"), true);				
            		}
 			if (($SenderID == $triggerIDConf) && ($Message == 10603)){// && (boolval($Data[0]))){
 				//$this->SWRegler();
 				echo "20";
-				SetValue($this->GetIDForIdent("Abw"), false);				
+				SetValue($this->GetIDForIdent("SWS_Abw"), false);				
+           		}
+			if (($SenderID == $triggerIDAbw) && ($Message == 10603)){// && (boolval($Data[0]))){
+				//$this->SWRegler();
+				echo "20";
+				SetValue($this->GetIDForIdent("SWS_Abw"), false);				
            		}
         }
         /**
