@@ -102,7 +102,7 @@ class HeizungssteuerungRegler extends IPSModule
 				$zp_conf = getValue($this->GetIDForIdent("ZP_Conf"));
 				$abw = getValue($this->GetIDForIdent("Abw"));
 				$this->ProgrammAuswahl();
-				if($abw == true){
+				if($abw == false){
 					IPS_SetHidden($VariabelID_Ab, false);
 					IPS_SetHidden($VariabelID_An, false);
 					$this->AbwesenheitsAuswahl();
