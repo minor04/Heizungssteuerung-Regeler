@@ -141,6 +141,17 @@ class HeizungssteuerungRegler extends IPSModule
 				$this->SWRegler();
 			break;
 
+        		case 'SWS_Abw':
+				if($test == true){
+					IPS_SetHidden($VariabelID_Ab, false);
+					IPS_SetHidden($VariabelID_An, false);
+				}
+				else{
+					IPS_SetHidden($VariabelID_Ab, true);
+					IPS_SetHidden($VariabelID_An, true);
+				}
+			break;
+
         	}
 		
         $this->SetValue($key, $value);	
