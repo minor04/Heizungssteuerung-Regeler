@@ -7,6 +7,8 @@ $abw = false;
 $prog = 2;
 $sw = 22;
 $sw_abs = 22;
+
+$sws_abw = false;
 	
 class HeizungssteuerungRegler extends IPSModule
 	{
@@ -111,7 +113,7 @@ class HeizungssteuerungRegler extends IPSModule
         */
 	
 	public function RequestAction($key, $value){
-		global $sws, $zp_conf, $abw, $prog, $sw, $sw_abs;
+		global $sws, $zp_conf, $abw, $prog, $sw, $sw_abs, $sws_abw;
         	switch ($key) {
         		case 'SWS':
 				$sws = $value;
@@ -142,6 +144,7 @@ class HeizungssteuerungRegler extends IPSModule
 			break;
 
         		case 'SWS_Abw':
+				$sws_abw = $value;
 				$this->AbwesenheitsAuswahl();				
 			break;
 
@@ -283,8 +286,7 @@ class HeizungssteuerungRegler extends IPSModule
 	public function AbwesenheitsAuswahl(){
 		
 
-		global $sws, $zp_conf, $abw;
-		$test = getValue($this->GetIDForIdent("SWS_Abw"));
+		global $sws_abw;
 		
 		$KategorieID_Heizung = IPS_GetCategoryIDByName("Heizung", 0);
 		$KategorieID_Settings = IPS_GetCategoryIDByName("Einstellungen", $KategorieID_Heizung);
@@ -293,7 +295,7 @@ class HeizungssteuerungRegler extends IPSModule
 		$VariabelID_An = IPS_GetEventIDByName("Ankunft", $InstanzID);
 		
 				
-		if($test == true){
+		if($sws_abw == true){
 			IPS_SetHidden($VariabelID_Ab, false);
 			IPS_SetHidden($VariabelID_An, false);
 		}
