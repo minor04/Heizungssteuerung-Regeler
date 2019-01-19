@@ -17,9 +17,7 @@ class HeizungssteuerungRegler extends IPSModule
 		{
 			//Never delete this line!
 			parent::Create();
-			
-			$this->VariabelProfilProgramm();
-			
+						
 			if (!IPS_VariableProfileExists("Heizung_Programm")) {
 			
 				IPS_CreateVariableProfile("Heizung_Programm", 1); // 0 boolean, 1 int, 2 float, 3 string,
