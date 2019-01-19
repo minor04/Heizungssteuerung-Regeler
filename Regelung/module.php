@@ -322,20 +322,20 @@ class HeizungssteuerungRegler extends IPSModule
 		
 
 		global $sws, $zp_conf, $sws_abw, $abw;
-		$test = getValue($this->GetIDForIdent("SWS_Abw"));
+		//$test = getValue($this->GetIDForIdent("SWS_Abw"));
 		
 		if($sws == 0){
 			SetValue($this->GetIDForIdent("prog"), 0);
 			IPS_SetDisabled($this->GetIDForIdent("prog"), false);
-			//echo "0";
+			echo "Aus";
 		}
 		else if($sws == 1){
 			IPS_SetDisabled($this->GetIDForIdent("prog"), false);
-			//echo "1";
+			echo "Hand";
 		}
 		else{
 			IPS_SetDisabled($this->GetIDForIdent("prog"), true);
-			//echo "2";
+			echo "Auto";
 			
 			if($abw == true && $sws_abw == true){
 				SetValue($this->GetIDForIdent("prog"), 3);
@@ -355,21 +355,21 @@ class HeizungssteuerungRegler extends IPSModule
 		}
 		
 		
-		$KategorieID_Heizung = IPS_GetCategoryIDByName("Heizung", 0);
-		$KategorieID_Settings = IPS_GetCategoryIDByName("Einstellungen", $KategorieID_Heizung);
-		$InstanzID = IPS_GetInstanceIDByName("Regler", $KategorieID_Settings);
-		$VariabelID_Ab = IPS_GetEventIDByName("Abwesend", $InstanzID);
-		$VariabelID_An = IPS_GetEventIDByName("Ankunft", $InstanzID);
+		//$KategorieID_Heizung = IPS_GetCategoryIDByName("Heizung", 0);
+		//$KategorieID_Settings = IPS_GetCategoryIDByName("Einstellungen", $KategorieID_Heizung);
+		//$InstanzID = IPS_GetInstanceIDByName("Regler", $KategorieID_Settings);
+		//$VariabelID_Ab = IPS_GetEventIDByName("Abwesend", $InstanzID);
+		//$VariabelID_An = IPS_GetEventIDByName("Ankunft", $InstanzID);
 		
 				
-		if($test == true){
-			IPS_SetHidden($VariabelID_Ab, false);
-			IPS_SetHidden($VariabelID_An, false);
-		}
-		else{
-			IPS_SetHidden($VariabelID_Ab, true);
-			IPS_SetHidden($VariabelID_An, true);
-		}
+		//if($test == true){
+			//IPS_SetHidden($VariabelID_Ab, false);
+			//IPS_SetHidden($VariabelID_An, false);
+		//}
+		//else{
+			//IPS_SetHidden($VariabelID_Ab, true);
+			//IPS_SetHidden($VariabelID_An, true);
+		//}
 		
 		if($abw == false){
 			SetValue($this->GetIDForIdent("SWS_Abw"), false);
