@@ -426,8 +426,9 @@ class HeizungssteuerungRegler extends IPSModule
 		
 		//$this->EnableAction("SWS_Abw");
 		//$test = $this->getValue("SW");
-		$test = GetValueFloat(56821);
+		//$test = GetValueFloat(56821);
 		//$test = $this->ReadPropertyFloat("SW");
+		$this->EnableAction("SW_Abs");
 		echo $test;
 		
 
