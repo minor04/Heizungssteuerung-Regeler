@@ -354,23 +354,7 @@ class HeizungssteuerungRegler extends IPSModule
 			}
 		}
 		
-		
-		//$KategorieID_Heizung = IPS_GetCategoryIDByName("Heizung", 0);
-		//$KategorieID_Settings = IPS_GetCategoryIDByName("Einstellungen", $KategorieID_Heizung);
-		//$InstanzID = IPS_GetInstanceIDByName("Regler", $KategorieID_Settings);
-		//$VariabelID_Ab = IPS_GetEventIDByName("Abwesend", $InstanzID);
-		//$VariabelID_An = IPS_GetEventIDByName("Ankunft", $InstanzID);
-		
-				
-		//if($test == true){
-			//IPS_SetHidden($VariabelID_Ab, false);
-			//IPS_SetHidden($VariabelID_An, false);
-		//}
-		//else{
-			//IPS_SetHidden($VariabelID_Ab, true);
-			//IPS_SetHidden($VariabelID_An, true);
-		//}
-		
+			
 		if($abw == false){
 			SetValue($this->GetIDForIdent("SWS_Abw"), false);
 		}
@@ -435,17 +419,7 @@ class HeizungssteuerungRegler extends IPSModule
 		
 	}
 	
-	public function Test2(){
-		
-		//global $Test;
-		//$StatusvariableValue = $this->GetValue("Test");
-		//echo $Test;
-		//int $Test
-		//$this->EnableAction("test");
-	
-	}
-
-	    
+    
 
 		   
     }
