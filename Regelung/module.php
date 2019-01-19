@@ -21,7 +21,7 @@ class HeizungssteuerungRegler extends IPSModule
 			if (!IPS_VariableProfileExists("Heizung_Programm")) {
 			
 				IPS_CreateVariableProfile("Heizung_Programm", 1); // 0 boolean, 1 int, 2 float, 3 string,
-				IPS_SetVariableProfileValues("Heizung_Programm", 1, 3, 1);
+				IPS_SetVariableProfileValues("Heizung_Programm", 0, 3, 1);
 				IPS_SetVariableProfileDigits("Heizung_Programm", 0);
 				IPS_SetVariableProfileAssociation("Heizung_Programm", 0, "Aus", "", 0xFFFFFF);
 				IPS_SetVariableProfileAssociation("Heizung_Programm", 1, "Eco", "", 0xFFFFFF);
@@ -32,7 +32,7 @@ class HeizungssteuerungRegler extends IPSModule
 			if (!IPS_VariableProfileExists("Heizung_SWS")) {
 			
 				IPS_CreateVariableProfile("Heizung_SWS", 1); // 0 boolean, 1 int, 2 float, 3 string,
-				IPS_SetVariableProfileValues("Heizung_SWS", 1, 2, 1);
+				IPS_SetVariableProfileValues("Heizung_SWS", 0, 2, 1);
 				IPS_SetVariableProfileDigits("Heizung_SWS", 0);
 				IPS_SetVariableProfileAssociation("Heizung_SWS", 0, "Aus", "", 0xFFFFFF);
 				IPS_SetVariableProfileAssociation("Heizung_SWS", 1, "Hand", "", 0xFFFFFF);
