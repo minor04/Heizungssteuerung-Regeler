@@ -80,7 +80,7 @@ class HeizungssteuerungRegler extends IPSModule
         	}
 	
 	        public function MessageSink ($TimeStamp, $SenderID, $Message, $Data) {
-		global $sws, $zp_conf, $abw, $prog, $sw, $sw_abs;
+		global $sws, $zp_conf, $sws_abw, $abw, $prog, $sw, $sw_abs;
             		$triggerIDProg = $this->ReadPropertyInteger("TrigProgramm");
 			$triggerIDConf = $this->ReadPropertyInteger("TrigConfort");
 			$triggerIDAbw = $this->ReadPropertyInteger("TrigAbwesend");
@@ -94,12 +94,14 @@ class HeizungssteuerungRegler extends IPSModule
 			if (($SenderID == $triggerIDConf) && ($Message == 10603)){// && (boolval($Data[0]))){
 				$sws = getValue($this->GetIDForIdent("SWS"));
 				$zp_conf = getValue($this->GetIDForIdent("ZP_Conf"));
+				$sws_abw = getValue($this->GetIDForIdent("SWS_Abw"));
 				$abw = getValue($this->GetIDForIdent("Abw"));
 				$this->ProgrammAuswahl();
            		}
 			if (($SenderID == $triggerIDAbw) && ($Message == 10603)){// && (boolval($Data[0]))){
 				$sws = getValue($this->GetIDForIdent("SWS"));
 				$zp_conf = getValue($this->GetIDForIdent("ZP_Conf"));
+				$sws_abw = getValue($this->GetIDForIdent("SWS_Abw"));
 				$abw = getValue($this->GetIDForIdent("Abw"));
 				$this->ProgrammAuswahl();
 				if($abw == false){
@@ -118,11 +120,12 @@ class HeizungssteuerungRegler extends IPSModule
         */
 	
 	public function RequestAction($key, $value){
-		global $sws, $zp_conf, $abw, $prog, $sw, $sw_abs, $sws_abw;
+		global $sws, $zp_conf, $sws_abw, $abw, $prog, $sw, $sw_abs, $sws_abw;
         	switch ($key) {
         		case 'SWS':
 				$sws = $value;
 				$zp_conf = getValue($this->GetIDForIdent("ZP_Conf"));
+				$sws_abw = getValue($this->GetIDForIdent("SWS_Abw"));
 				$abw = getValue($this->GetIDForIdent("Abw"));
 				$this->ProgrammAuswahl();
             		break;
@@ -149,7 +152,10 @@ class HeizungssteuerungRegler extends IPSModule
 			break;
 
         		case 'SWS_Abw':
+				$sws = getValue($this->GetIDForIdent("SWS_Abw"));
+				$zp_conf = getValue($this->GetIDForIdent("ZP_Conf"));
 				$sws_abw = $value;
+				$abw = getValue($this->GetIDForIdent("Abw"));
 				$this->AbwesenheitsAuswahl();				
 			break;
 
@@ -307,6 +313,7 @@ class HeizungssteuerungRegler extends IPSModule
 		else{
 			IPS_SetHidden($VariabelID_Ab, true);
 			IPS_SetHidden($VariabelID_An, true);
+			$this->ProgrammAuswahl();
 		}
 
 	}
@@ -314,7 +321,7 @@ class HeizungssteuerungRegler extends IPSModule
 	public function ProgrammAuswahl(){
 		
 
-		global $sws, $zp_conf, $abw;
+		global $sws, $zp_conf, $sws_abw, $abw;
 		$test = getValue($this->GetIDForIdent("SWS_Abw"));
 		
 		if($sws == 0){
@@ -330,7 +337,7 @@ class HeizungssteuerungRegler extends IPSModule
 			IPS_SetDisabled($this->GetIDForIdent("prog"), true);
 			//echo "2";
 			
-			if($abw == true){
+			if($abw == true && $sws_abw == true){
 				SetValue($this->GetIDForIdent("prog"), 3);
 				IPS_SetDisabled($this->GetIDForIdent("prog"), true);
 				echo "Abwesend";
