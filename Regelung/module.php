@@ -64,6 +64,8 @@ class HeizungssteuerungRegler extends IPSModule
             		//Never delete this line!
             		parent::ApplyChanges();
 			
+			$this->VariabelProfilProgramm();
+			
             		$triggerIDProg = $this->ReadPropertyInteger("TrigProgramm");
             		$this->RegisterMessage($triggerIDProg, 10603 /* VM_UPDATE */);
 			
