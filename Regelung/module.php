@@ -152,7 +152,7 @@ class HeizungssteuerungRegler extends IPSModule
 			break;
 
         		case 'SWS_Abw':
-				$sws = getValue($this->GetIDForIdent("SWS_Abw"));
+				$sws = getValue($this->GetIDForIdent("SWS"));
 				$zp_conf = getValue($this->GetIDForIdent("ZP_Conf"));
 				$sws_abw = $value;
 				$abw = getValue($this->GetIDForIdent("Abw"));
