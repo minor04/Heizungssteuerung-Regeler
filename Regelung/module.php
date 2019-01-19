@@ -99,6 +99,9 @@ class HeizungssteuerungRegler extends IPSModule
 			//Timerzeit setzen in Minuten
 			$this->SetTimerInterval("UpdateWeather", $this->ReadPropertyInteger("UpdateWeatherInterval")*1000*60);
 			
+			//Standartaktion Aktivieren
+			$this->VariabelStandartaktion();
+			
 
         	}
 	
@@ -229,8 +232,8 @@ class HeizungssteuerungRegler extends IPSModule
 		$this->EnableAction("prog");
 		$this->EnableAction("SW");
 		$this->EnableAction("SW_Abs");
+		$this->EnableAction("SWS_Abw");
 		
-
 	}
 		
 	public function ZeitPro(){
