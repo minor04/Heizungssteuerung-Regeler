@@ -19,9 +19,28 @@ class HeizungssteuerungRegler extends IPSModule
 			parent::Create();
 			
 			$this->VariabelProfilProgramm();
-
 			
-			$this->RegisterPropertyInteger("TrigProgramm", 0);
+			if (!IPS_VariableProfileExists("Heizung_Programm")) {
+			
+				IPS_CreateVariableProfile("Heizung_Programm", 1); // 0 boolean, 1 int, 2 float, 3 string,
+				IPS_SetVariableProfileValues("Heizung_Programm", 1, 3, 1);
+				IPS_SetVariableProfileDigits("Heizung_Programm", 0);
+				IPS_SetVariableProfileAssociation("Heizung_Programm", 0, "Aus", "", 0xFFFFFF);
+				IPS_SetVariableProfileAssociation("Heizung_Programm", 1, "Eco", "", 0xFFFFFF);
+				IPS_SetVariableProfileAssociation("Heizung_Programm", 2, "Comfort", "", 0xFFFFFF);
+				IPS_SetVariableProfileAssociation("Heizung_Programm", 3, "Abwesend", "", 0xFFFFFF);
+			}
+
+			if (!IPS_VariableProfileExists("Heizung_SWS")) {
+			
+				IPS_CreateVariableProfile("Heizung_SWS", 1); // 0 boolean, 1 int, 2 float, 3 string,
+				IPS_SetVariableProfileValues("Heizung_SWS", 1, 2, 1);
+				IPS_SetVariableProfileDigits("Heizung_SWS", 0);
+				IPS_SetVariableProfileAssociation("Heizung_SWS", 0, "Aus", "", 0xFFFFFF);
+				IPS_SetVariableProfileAssociation("Heizung_SWS", 1, "Ein", "", 0xFFFFFF);
+				IPS_SetVariableProfileAssociation("Heizung_SWS", 2, "Auto", "", 0xFFFFFF);
+			}
+		
 			
 			//___In_IPS_zurverfügungstehende_Variabeln_______________________________________________
 			$this->RegisterVariableInteger("SWS", "Softwareschalter", "Heizung_SWS", 1);
@@ -53,8 +72,8 @@ class HeizungssteuerungRegler extends IPSModule
 			$this->RegisterPropertyFloat("Lat", 0);
 			$this->RegisterPropertyFloat("Long", 0);
 			$this->RegisterPropertyBoolean("WetterForcast", true);
-			//$this->RegisterPropertyInteger("InputTriggerID", true);
 
+			$this->RegisterPropertyInteger("TrigProgramm", 0);
 			$this->RegisterPropertyInteger("TrigConfort", 0);
 			$this->RegisterPropertyInteger("TrigAbwesend", 0);
 			
@@ -203,35 +222,6 @@ class HeizungssteuerungRegler extends IPSModule
 		
 	}
 	
-	public function VariabelProfilProgramm(){
-		
-		if (!IPS_VariableProfileExists("Heizung_Programm")) {
-			
-			IPS_CreateVariableProfile("Heizung_Programm", 1); // 0 boolean, 1 int, 2 float, 3 string,
-			IPS_SetVariableProfileValues("Heizung_Programm", 1, 3, 1);
-			IPS_SetVariableProfileDigits("Heizung_Programm", 0);
-			IPS_SetVariableProfileAssociation("Heizung_Programm", 0, "Aus", "", 0xFFFFFF);
-			IPS_SetVariableProfileAssociation("Heizung_Programm", 1, "Eco", "", 0xFFFFFF);
-			IPS_SetVariableProfileAssociation("Heizung_Programm", 2, "Comfort", "", 0xFFFFFF);
-			IPS_SetVariableProfileAssociation("Heizung_Programm", 3, "Abwesend", "", 0xFFFFFF);
-		}
-		else{
-			echo "Das Variabelprofil". "'Heizung_Programm'". "ist bereits vorhanden";
-		}
-		
-		if (!IPS_VariableProfileExists("Heizung_SWS")) {
-			
-			IPS_CreateVariableProfile("Heizung_SWS", 1); // 0 boolean, 1 int, 2 float, 3 string,
-			IPS_SetVariableProfileValues("Heizung_SWS", 1, 2, 1);
-			IPS_SetVariableProfileDigits("Heizung_SWS", 0);
-			IPS_SetVariableProfileAssociation("Heizung_SWS", 0, "Aus", "", 0xFFFFFF);
-			IPS_SetVariableProfileAssociation("Heizung_SWS", 1, "Ein", "", 0xFFFFFF);
-			IPS_SetVariableProfileAssociation("Heizung_SWS", 2, "Auto", "", 0xFFFFFF);
-		}
-		else{
-			echo "Das Variabelprofil". "'Heizung_SWS'". "ist bereits vorhanden";
-		}
-	}
 	
 	public function VariabelStandartaktion(){
 		
