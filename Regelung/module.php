@@ -53,8 +53,8 @@ class HeizungssteuerungRegler extends IPSModule
 				IPS_SetVariableProfileValues("Heizung_SB", 0, 2, 1);
 				IPS_SetVariableProfileDigits("Heizung_SB", 0);
 				IPS_SetVariableProfileAssociation("Heizung_SB", 0, "Aus", "", 0xFFFFFF);
-				IPS_SetVariableProfileAssociation("Heizung_SB", 1, "Uebergang", "", 0xFFFFFF);
-				IPS_SetVariableProfileAssociation("Heizung_SB", 2, "Frost", "", 0xFFFFFF);
+				IPS_SetVariableProfileAssociation("Heizung_SB", 1, "Uebergang", "", 0x80ff00);
+				IPS_SetVariableProfileAssociation("Heizung_SB", 2, "Frost", "", 0x0080c0);
 			}
 		
 			
