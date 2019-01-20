@@ -292,14 +292,14 @@ class HeizungssteuerungRegler extends IPSModule
 			$EreignisID =IPS_CreateEvent(1);
 			IPS_SetName($EreignisID, "Von");
 			IPS_SetParent($EreignisID, $InstanzID);
-			IPS_SetPosition($EreignisID, 12);
-			IPS_SetEventCyclic($EreignisID, 1 /* Täglich */ ,5,0,0,0,0);
-			
-			$EreignisID =IPS_CreateEvent(1);
-			IPS_SetName($EreignisID, "Bis");
-			IPS_SetParent($EreignisID, $InstanzID);
 			IPS_SetPosition($EreignisID, 13);
 			IPS_SetEventCyclic($EreignisID, 1 /* Täglich */ ,5,0,0,0,0);
+			
+			$EreignisID_02 =IPS_CreateEvent(1);
+			IPS_SetName($EreignisID_02, "Bis");
+			IPS_SetParent($EreignisID_02, $InstanzID);
+			IPS_SetPosition($EreignisID_02, 14);
+			IPS_SetEventCyclic($EreignisID_02, 1 /* Täglich */ ,5,0,0,0,0);
 		
 			IPS_SetHidden($this->GetIDForIdent("ZP_Conf"), true);
 			IPS_SetHidden($this->GetIDForIdent("Abw"), true);
