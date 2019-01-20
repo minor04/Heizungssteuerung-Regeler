@@ -21,7 +21,7 @@ class HeizungssteuerungRegler extends IPSModule
 			if (!IPS_VariableProfileExists("Heizung_Programm")) {
 			
 				IPS_CreateVariableProfile("Heizung_Programm", 1); // 0 boolean, 1 int, 2 float, 3 string,
-				IPS_SetVariableProfileValues("Heizung_Programm", 0, 3, 1);
+				IPS_SetVariableProfileValues("Heizung_Programm", 0, 3, 0);
 				IPS_SetVariableProfileDigits("Heizung_Programm", 0);
 				IPS_SetVariableProfileAssociation("Heizung_Programm", 0, "Aus", "", 0xFFFFFF);
 				IPS_SetVariableProfileAssociation("Heizung_Programm", 1, "Eco", "", 0xFFFFFF);
@@ -38,13 +38,20 @@ class HeizungssteuerungRegler extends IPSModule
 				IPS_SetVariableProfileAssociation("Heizung_SWS", 1, "Hand", "", 0xFFFFFF);
 				IPS_SetVariableProfileAssociation("Heizung_SWS", 2, "Auto", "", 0xFFFFFF);
 			}
+			
+			if (!IPS_VariableProfileExists("Heizung_Abs")) {
+			
+				IPS_CreateVariableProfile("Heizung_SWS", 2); // 0 boolean, 1 int, 2 float, 3 string,
+				IPS_SetVariableProfileValues("Heizung_SWS", -3, 3, 0.5);
+				IPS_SetVariableProfileDigits("Heizung_SWS", 1);
+			}
 		
 			
 			//___In_IPS_zurverfügungstehende_Variabeln_______________________________________________
 			$this->RegisterVariableInteger("SWS", "Softwareschalter", "Heizung_SWS", 1);
 			$this->RegisterVariableInteger("prog", "Programm", "Heizung_Programm", 2);
 			$this->RegisterVariableFloat("SW", "Sollwert", "~Temperature.Room", 3);
-			$this->RegisterVariableFloat("SW_Abs", "Sollwert Absenkung", "~Temperature.Difference", 4);
+			$this->RegisterVariableFloat("SW_Abs", "Sollwert Absenkung", "Heizung_Abs", 4);
 			$this->RegisterVariableFloat("SW_ber", "Sollwert Berechnet", "~Temperature.Room", 5);
 			$this->RegisterVariableFloat("AT", "Aussentemperatur", "~Temperature", 6);
 			$this->RegisterVariableFloat("AT_2h", "Aussentemperatur +2h", "~Temperature", 7);
