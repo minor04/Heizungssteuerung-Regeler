@@ -44,6 +44,7 @@ class HeizungssteuerungRegler extends IPSModule
 				IPS_CreateVariableProfile("Heizung_Abs", 2); // 0 boolean, 1 int, 2 float, 3 string,
 				IPS_SetVariableProfileValues("Heizung_Abs", -3, 3, 0.5);
 				IPS_SetVariableProfileDigits("Heizung_Abs", 1);
+				IPS_SetVariableProfileText("Heizung_Abs", "", " K");
 			}
 		
 			
