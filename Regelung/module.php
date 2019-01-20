@@ -290,7 +290,7 @@ class HeizungssteuerungRegler extends IPSModule
 		
 		
 			$EreignisID =IPS_CreateEvent(1);
-			IPS_SetName($EreignisID, "Abwesend");
+			IPS_SetName($EreignisID, "Von");
 			IPS_SetParent($EreignisID, $InstanzID);
 			IPS_SetPosition($EreignisID, 12);
 			IPS_SetEventCyclic($EreignisID, 1 /* Täglich */ ,5,0,0,0,0);
@@ -316,7 +316,7 @@ class HeizungssteuerungRegler extends IPSModule
 		$KategorieID_Heizung = IPS_GetCategoryIDByName("Heizung", 0);
 		$KategorieID_Settings = IPS_GetCategoryIDByName("Einstellungen", $KategorieID_Heizung);
 		$InstanzID = IPS_GetInstanceIDByName("Regler", $KategorieID_Settings);
-		$VariabelID_Ab = IPS_GetEventIDByName("Abwesend", $InstanzID);
+		$VariabelID_Ab = IPS_GetEventIDByName("Von", $InstanzID);
 		$VariabelID_An = IPS_GetEventIDByName("Ankunft", $InstanzID);
 		
 				
