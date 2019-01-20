@@ -47,9 +47,19 @@ class HeizungssteuerungRegler extends IPSModule
 				IPS_SetVariableProfileText("Heizung_Abs", "", " K");
 				IPS_SetVariableProfileIcon("Heizung_Abs",  "Temperature");
 			}
+			if (!IPS_VariableProfileExists("Heizung_SB")) {
+			
+				IPS_CreateVariableProfile("Heizung_SB", 1); // 0 boolean, 1 int, 2 float, 3 string,
+				IPS_SetVariableProfileValues("Heizung_SB", 0, 2, 1);
+				IPS_SetVariableProfileDigits("Heizung_SB", 0);
+				IPS_SetVariableProfileAssociation("Heizung_SB", 0, "Aus", "", 0xFFFFFF);
+				IPS_SetVariableProfileAssociation("Heizung_SB", 1, "Uebergang", "", 0xFFFFFF);
+				IPS_SetVariableProfileAssociation("Heizung_SB", 2, "Frost", "", 0xFFFFFF);
+			}
 		
 			
 			//___In_IPS_zurverfügungstehende_Variabeln_______________________________________________
+			$this->RegisterVariableInteger("SB", "Sonderbetrieb", "Heizung_SB", 0);
 			$this->RegisterVariableInteger("SWS", "Softwareschalter", "Heizung_SWS", 1);
 			$this->RegisterVariableInteger("prog", "Programm", "Heizung_Programm", 2);
 			$this->RegisterVariableFloat("SW", "Sollwert", "~Temperature.Room", 3);
@@ -382,28 +392,41 @@ class HeizungssteuerungRegler extends IPSModule
 			//_________________Heizung_Eco__________________________________________________
 			if ($program == 0) {
 				$sollwert_ber = 0;
+				SetValue($this->GetIDForIdent("SB"), 0);
+				IPS_SetHidden($this->GetIDForIdent("SB"), true);
                 	} 
 			//_________________Heizung_Eco__________________________________________________
 			if ($program == 1) {
 				$sollwert_ber = ($sollwert - $sollwert_ab);
+				SetValue($this->GetIDForIdent("SB"), 0);
+				IPS_SetHidden($this->GetIDForIdent("SB"), true);
                 	} 
 			//_________________Heizung_Comfort______________________________________________ 
 			else if ($program == 2) {
 				//___Modul_Übergangszeit____________________________________________________
 				if ($AT >= $sollwert || $AT_2 >= $sollwert || $AT_4 >= $sollwert || $AT_8 >= $sollwert){
 					$sollwert_ber = ($sollwert - 2);
+					SetValue($this->GetIDForIdent("SB"), 1);
+					IPS_SetHidden($this->GetIDForIdent("SB"), false);
 				}
 				//___Modul_Frost____________________________________________________________
 				else if ($AT <= -5){
 					$sollwert_ber = $sollwert - (($AT + 5) * (-0.1));  //Schiebung über Vareabeln (((15-5)/100) * -1)
+					SetValue($this->GetIDForIdent("SB"), 2);
+					IPS_SetHidden($this->GetIDForIdent("SB"), false);
 				}
+				//___Modul_Comfort__________________________________________________________
 				else{
 					$sollwert_ber = ($sollwert);
+					SetValue($this->GetIDForIdent("SB"), 0);
+					IPS_SetHidden($this->GetIDForIdent("SB"), true);
 				}
 			}
 			//_________________Heizung_Abwesend_____________________________________________ 
 			else if ($program == 3) {
 				$sollwert_ber = 18;
+				SetValue($this->GetIDForIdent("SB"), 0);
+				IPS_SetHidden($this->GetIDForIdent("SB"), true);
 			}
 		
 		SetValue($this->GetIDForIdent("SW_ber"), $sollwert_ber);
