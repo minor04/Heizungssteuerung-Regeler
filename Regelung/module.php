@@ -96,7 +96,7 @@ class HeizungssteuerungRegler extends IPSModule
 			
 			
 			//Timer erstellen
-			$this->RegisterTimer("UpdateWeather", $this->ReadPropertyInteger("UpdateWeatherInterval"), 'WID_UpdateWeatherData($_IPS[\'TARGET\']);');
+			$this->RegisterTimer("UpdateWeather", $this->ReadPropertyInteger("UpdateWeatherInterval"), 'MIN_UpdateWeatherData($_IPS[\'TARGET\']);');
 		}
 	
 	        public function ApplyChanges() {
@@ -115,7 +115,6 @@ class HeizungssteuerungRegler extends IPSModule
 			
 			//Timerzeit setzen in Minuten
 			if ($this->ReadPropertyString("APIkey") != ""){
-				//$this->SetTimerInterval("UpdateWeather", $this->ReadPropertyInteger("UpdateWeatherInterval")*1000*60);
 				$this->SetTimerInterval("UpdateWeather", $this->ReadPropertyInteger("UpdateWeatherInterval")*1000*60);
 			}
 			
