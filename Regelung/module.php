@@ -256,62 +256,52 @@ class HeizungssteuerungRegler extends IPSModule
 		
 	public function ZeitPro(){
 		
-		//if (!IPS_VariableProfileExists("Heizung_Programm")) {
-			
-			//IPS_CreateEvent(1); // 0 ausgelöst, 1 zyklisch, 2 Wochenpla
-			//IPS_CreateVariableProfile("Hei", 1); // 0 ausgelöst, 1 zyklisch, 2 Wochenpla
-			//$ScriptID = IPS_CreateScript(0);
-			//IPS_SetName($ScriptID, "Zeitschaltprogramm");
-			//IPS_SetParent($ScriptID, 14663);
-		
-			$KategorieID_Heizung = IPS_GetCategoryIDByName("Heizung", 0);
-			$KategorieID_Settings = IPS_GetCategoryIDByName("Einstellungen", $KategorieID_Heizung);
-			$InstanzID = IPS_GetInstanceIDByName("Regler", $KategorieID_Settings);
-			
-			$EreignisID =IPS_CreateEvent(2);
-			IPS_SetName($EreignisID, "Zeitschaltprogramm");
-			IPS_SetParent($EreignisID, $InstanzID);
-			IPS_SetPosition($EreignisID, 10);
-			
-			IPS_SetEventScheduleGroup($EreignisID, 0, 31); //Mo - Fr (1 + 2 + 4 + 8 + 16)
-			IPS_SetEventScheduleGroup($EreignisID, 1, 96); //Sa + So (32 + 64)
-			
-			IPS_SetEventScheduleAction($EreignisID, 0, "Eco", 0xFF8080, "SetValue(36402, false);");
-			IPS_SetEventScheduleAction($EreignisID, 1, "Confort", 0xFF0000, "SetValue(36402, true);");
-		
-			IPS_SetEventScheduleGroupPoint($EreignisID, 0, 0, 0, 0, 0, 0); //Um 0:00 Aktion mit ID 0 "Eco" aufrufen
-			IPS_SetEventScheduleGroupPoint($EreignisID, 0, 1, 6, 0, 0, 1); //Um 6:00 Aktion mit ID 1 "Comfort" aufrufen
-			IPS_SetEventScheduleGroupPoint($EreignisID, 0, 2, 8, 0, 0, 0); //Um 8:00 Aktion mit ID 0 "Eco" aufrufen
-			IPS_SetEventScheduleGroupPoint($EreignisID, 0, 3, 16, 0, 0, 1); //Um 16:00 Aktion mit ID 1 "Comfort" aufrufen
-			IPS_SetEventScheduleGroupPoint($EreignisID, 0, 4, 22, 0, 0, 0); //Um 22:00 Aktion mit ID 0 "Eco" aufrufen
-		
-			IPS_SetEventScheduleGroupPoint($EreignisID, 1, 10, 0, 0, 0, 0); //Um 0:00 Aktion mit ID 0 "Eco" aufrufen
-			IPS_SetEventScheduleGroupPoint($EreignisID, 1, 11, 7, 0, 0, 1); //Um 7:00 Aktion mit ID 1 "Comfort" aufrufen
-			IPS_SetEventScheduleGroupPoint($EreignisID, 1, 12, 22, 0, 0, 0); //Um 22:00 Aktion mit ID 0 "Eco" aufrufen
-		
-		
-			$EreignisID =IPS_CreateEvent(1);
-			IPS_SetName($EreignisID, "Von");
-			IPS_SetParent($EreignisID, $InstanzID);
-			IPS_SetPosition($EreignisID, 13);
-			IPS_SetEventCyclic($EreignisID, 1 /* Täglich */ ,5,0,0,0,0);
-			
-			$EreignisID_02 =IPS_CreateEvent(1);
-			IPS_SetName($EreignisID_02, "Bis");
-			IPS_SetParent($EreignisID_02, $InstanzID);
-			IPS_SetPosition($EreignisID_02, 14);
-			IPS_SetEventCyclic($EreignisID_02, 1 /* Täglich */ ,5,0,0,0,0);
-		
-			IPS_SetHidden($this->GetIDForIdent("ZP_Conf"), true);
-			IPS_SetHidden($this->GetIDForIdent("Abw"), true);
-		
-		//}		
 	
+		$KategorieID_Heizung = IPS_GetCategoryIDByName("Heizung", 0);
+		$KategorieID_Settings = IPS_GetCategoryIDByName("Einstellungen", $KategorieID_Heizung);
+		$InstanzID = IPS_GetInstanceIDByName("Regler", $KategorieID_Settings);
+			
+		$EreignisID =IPS_CreateEvent(2);
+		IPS_SetName($EreignisID, "Zeitschaltprogramm");
+		IPS_SetParent($EreignisID, $InstanzID);
+		IPS_SetPosition($EreignisID, 10);
+			
+		IPS_SetEventScheduleGroup($EreignisID, 0, 31); //Mo - Fr (1 + 2 + 4 + 8 + 16)
+		IPS_SetEventScheduleGroup($EreignisID, 1, 96); //Sa + So (32 + 64)
+			
+		IPS_SetEventScheduleAction($EreignisID, 0, "Eco", 0xFF8080, "SetValue(36402, false);");
+		IPS_SetEventScheduleAction($EreignisID, 1, "Confort", 0xFF0000, "SetValue(36402, true);");
+		
+		IPS_SetEventScheduleGroupPoint($EreignisID, 0, 0, 0, 0, 0, 0); //Um 0:00 Aktion mit ID 0 "Eco" aufrufen
+		IPS_SetEventScheduleGroupPoint($EreignisID, 0, 1, 6, 0, 0, 1); //Um 6:00 Aktion mit ID 1 "Comfort" aufrufen
+		IPS_SetEventScheduleGroupPoint($EreignisID, 0, 2, 8, 0, 0, 0); //Um 8:00 Aktion mit ID 0 "Eco" aufrufen
+		IPS_SetEventScheduleGroupPoint($EreignisID, 0, 3, 16, 0, 0, 1); //Um 16:00 Aktion mit ID 1 "Comfort" aufrufen
+		IPS_SetEventScheduleGroupPoint($EreignisID, 0, 4, 22, 0, 0, 0); //Um 22:00 Aktion mit ID 0 "Eco" aufrufen
+		
+		IPS_SetEventScheduleGroupPoint($EreignisID, 1, 10, 0, 0, 0, 0); //Um 0:00 Aktion mit ID 0 "Eco" aufrufen
+		IPS_SetEventScheduleGroupPoint($EreignisID, 1, 11, 7, 0, 0, 1); //Um 7:00 Aktion mit ID 1 "Comfort" aufrufen
+		IPS_SetEventScheduleGroupPoint($EreignisID, 1, 12, 22, 0, 0, 0); //Um 22:00 Aktion mit ID 0 "Eco" aufrufen
+		
+		
+		$EreignisID =IPS_CreateEvent(1);
+		IPS_SetName($EreignisID, "Von");
+		IPS_SetParent($EreignisID, $InstanzID);
+		IPS_SetPosition($EreignisID, 13);
+		IPS_SetEventCyclic($EreignisID, 1 /* Täglich */ ,5,0,0,0,0);
+		
+		$EreignisID_02 =IPS_CreateEvent(1);
+		IPS_SetName($EreignisID_02, "Bis");
+		IPS_SetParent($EreignisID_02, $InstanzID);
+		IPS_SetPosition($EreignisID_02, 14);
+		IPS_SetEventCyclic($EreignisID_02, 1 /* Täglich */ ,5,0,0,0,0);
+	
+		IPS_SetHidden($this->GetIDForIdent("ZP_Conf"), true);
+		IPS_SetHidden($this->GetIDForIdent("Abw"), true);
+		
 	}
 	
 	public function AbwesenheitsAuswahl(){
 		
-
 		global $sws_abw;
 		
 		$KategorieID_Heizung = IPS_GetCategoryIDByName("Heizung", 0);
@@ -335,7 +325,6 @@ class HeizungssteuerungRegler extends IPSModule
 		
 	public function ProgrammAuswahl(){
 		
-
 		global $sws, $zp_conf, $sws_abw, $abw;
 		//$test = getValue($this->GetIDForIdent("SWS_Abw"));
 		
@@ -373,9 +362,6 @@ class HeizungssteuerungRegler extends IPSModule
 		if($abw == false){
 			SetValue($this->GetIDForIdent("SWS_Abw"), false);
 		}
-		
-			//$this->SWRegler();
-
 	}
 	
 	public function SWRegler(){
@@ -436,12 +422,7 @@ class HeizungssteuerungRegler extends IPSModule
 	
 	public function Test(){
 		
-		//$this->EnableAction("SWS_Abw");
-		//$test = $this->getValue("SW");
-		//$test = GetValueFloat(56821);
-		//$test = $this->ReadPropertyFloat("SW");
 		$this->EnableAction("SW_Abs");
-		//echo $test;
 		
 
 		
