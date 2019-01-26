@@ -241,8 +241,12 @@ class HeizungssteuerungRegler extends IPSModule
 			IPS_SetHidden($this->GetIDForIdent("AT_8h"), true);
 		}
 		
-                	
 		
+		$prog = getValue($this->GetIDForIdent("prog"));
+		$sw = getValue($this->GetIDForIdent("SW"));
+		$sw_abs = getValue($this->GetIDForIdent("SW_Abs"));
+		$this->SWRegler();
+	
 	}
 	
 	
