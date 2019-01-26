@@ -114,7 +114,10 @@ class HeizungssteuerungRegler extends IPSModule
 			$this->RegisterMessage($triggerIDAbw, 10603 /* VM_UPDATE */);
 			
 			//Timerzeit setzen in Minuten
-			$this->SetTimerInterval("UpdateWeather", $this->ReadPropertyInteger("UpdateWeatherInterval")*1000*60);
+			if ($this->ReadPropertyString("APIkey") != ""){
+				//$this->SetTimerInterval("UpdateWeather", $this->ReadPropertyInteger("UpdateWeatherInterval")*1000*60);
+				$this->SetTimerInterval("UpdateWeather", $this->ReadPropertyInteger("UpdateWeatherInterval")*1000*60);
+			}
 			
 			//Standartaktion Aktivieren
 			$this->VariabelStandartaktion();
