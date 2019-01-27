@@ -10,10 +10,10 @@ $sw_abs = 22;
 
 $sws_abw = false;
 
-$at = 10;
-$at_2 = 10;
-$at_4 = 10;
-$at_8 = 10;
+//$at = 10;
+//$at_2 = 10;
+//$at_4 = 10;
+//$at_8 = 10;
 	
 class HeizungssteuerungRegler extends IPSModule
 	{
@@ -217,6 +217,7 @@ class HeizungssteuerungRegler extends IPSModule
    	}
 	
 	public function UpdateWeatherData(){
+		global $prog, $sw, $sw_abs;
 		
 		$apikey = $this->ReadPropertyString("APIkey");
 		$lat = $this->ReadPropertyFloat("Lat");
@@ -247,10 +248,10 @@ class HeizungssteuerungRegler extends IPSModule
 		}
 		
 		
-		//$prog = getValue($this->GetIDForIdent("prog"));
-		//$sw = getValue($this->GetIDForIdent("SW"));
-		//$sw_abs = getValue($this->GetIDForIdent("SW_Abs"));
-		//$this->SWRegler();
+		$prog = getValue($this->GetIDForIdent("prog"));
+		$sw = getValue($this->GetIDForIdent("SW"));
+		$sw_abs = getValue($this->GetIDForIdent("SW_Abs"));
+		$this->SWRegler();
 	
 	}
 	
