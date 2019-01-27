@@ -9,11 +9,6 @@ $sw = 22;
 $sw_abs = 22;
 
 $sws_abw = false;
-
-//$at = 10;
-//$at_2 = 10;
-//$at_4 = 10;
-//$at_8 = 10;
 	
 class HeizungssteuerungRegler extends IPSModule
 	{
