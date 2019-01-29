@@ -18,5 +18,5 @@
 		{ "type": "Button", "label": "Wetter", "onClick": "MIN_UpdateWeatherData($id);" },
 		{ "type": "Button", "label": "Test", "onClick": "MIN_Test($id);" },
 		
-	]
+	],
 }
