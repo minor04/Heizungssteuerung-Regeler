@@ -72,6 +72,7 @@ class HeizungssteuerungRegler extends IPSModule
 			$this->RegisterVariableBoolean("ZP_Conf", "ZP_Confort", "~Switch", 11);
 			$this->RegisterVariableBoolean("SWS_Abw", "Abwesenheit", "~Switch", 12);
 			$this->RegisterVariableBoolean("Abw", "Abwesend", "~Switch", 15);
+			$this->RegisterVariableBoolean("ALG_Abw", "ALG Abwesend", "~Switch", 16);
 			
 			//___Modulvariabeln______________________________________________________________________
 			$this->RegisterPropertyInteger("SWS", 1);
