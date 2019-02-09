@@ -56,7 +56,7 @@ class HeizungssteuerungRegler extends IPSModule
 				IPS_SetVariableProfileAssociation("Heizung_SB", 0, "Aus", "", 0xFFFFFF);
 				IPS_SetVariableProfileAssociation("Heizung_SB", 1, "Uebergang", "", 0x80ff00);
 				IPS_SetVariableProfileAssociation("Heizung_SB", 2, "Frost", "", 0x0080c0);
-				IPS_SetVariableProfileAssociation("Heizung_SB", 3, "Abwesend Zentral", "", 0xFFFFFF);
+				IPS_SetVariableProfileAssociation("Heizung_SB", 3, "Abwesend Zentral", "", 0xFFF00);
 			}
 		
 			
@@ -278,6 +278,8 @@ class HeizungssteuerungRegler extends IPSModule
 		$this->EnableAction("SW");
 		$this->EnableAction("SW_Abs");
 		$this->EnableAction("SWS_Abw");
+		
+		IPS_SetHidden("Z_Abw", true);
 		
 	}
 		
