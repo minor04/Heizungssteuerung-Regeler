@@ -9,6 +9,7 @@ $sw = 22;
 $sw_abs = 22;
 
 $sws_abw = false;
+$z_abw = false;
 	
 class HeizungssteuerungRegler extends IPSModule
 	{
@@ -55,6 +56,7 @@ class HeizungssteuerungRegler extends IPSModule
 				IPS_SetVariableProfileAssociation("Heizung_SB", 0, "Aus", "", 0xFFFFFF);
 				IPS_SetVariableProfileAssociation("Heizung_SB", 1, "Uebergang", "", 0x80ff00);
 				IPS_SetVariableProfileAssociation("Heizung_SB", 2, "Frost", "", 0x0080c0);
+				IPS_SetVariableProfileAssociation("Heizung_SB", 3, "Abwesend Zentral", "", 0xFFFFFF);
 			}
 		
 			
@@ -72,7 +74,7 @@ class HeizungssteuerungRegler extends IPSModule
 			$this->RegisterVariableBoolean("ZP_Conf", "ZP_Confort", "~Switch", 11);
 			$this->RegisterVariableBoolean("SWS_Abw", "Abwesenheit", "~Switch", 12);
 			$this->RegisterVariableBoolean("Abw", "Abwesend", "~Switch", 15);
-			//$this->RegisterVariableBoolean("ALG_Abw", "ALG Abwesend", "~Switch", 16); 07.02.19
+			$this->RegisterVariableBoolean("Z_Abw", "Zent Abwesend", "~Switch", 16);
 			
 			//___Modulvariabeln______________________________________________________________________
 			$this->RegisterPropertyInteger("SWS", 1);
@@ -94,6 +96,7 @@ class HeizungssteuerungRegler extends IPSModule
 			$this->RegisterPropertyInteger("TrigProgramm", 0);
 			$this->RegisterPropertyInteger("TrigConfort", 0);
 			$this->RegisterPropertyInteger("TrigAbwesend", 0);
+			$this->RegisterPropertyInteger("TrigZentralAbwesend", 0);
 			
 			
 			//Timer erstellen
@@ -114,6 +117,9 @@ class HeizungssteuerungRegler extends IPSModule
 			$triggerIDAbw = $this->ReadPropertyInteger("TrigAbwesend");
 			$this->RegisterMessage($triggerIDAbw, 10603 /* VM_UPDATE */);
 			
+			$triggerIDZAbw = $this->ReadPropertyInteger("TrigZentralAbwesend");
+			$this->RegisterMessage($triggerIDZAbw, 10603 /* VM_UPDATE */);
+			
 			//Timerzeit setzen in Minuten
 			if ($this->ReadPropertyString("APIkey") != ""){
 				$this->SetTimerInterval("UpdateWeather", $this->ReadPropertyInteger("UpdateWeatherInterval")*1000*60);
@@ -130,6 +136,7 @@ class HeizungssteuerungRegler extends IPSModule
             		$triggerIDProg = $this->ReadPropertyInteger("TrigProgramm");
 			$triggerIDConf = $this->ReadPropertyInteger("TrigConfort");
 			$triggerIDAbw = $this->ReadPropertyInteger("TrigAbwesend");
+			$triggerIDZAbw = $this->ReadPropertyInteger("TrigZentralAbwesend");
 	
 			if (($SenderID == $triggerIDProg) && ($Message == 10603)){// && (boolval($Data[0]))){
 				$prog = getValue($this->GetIDForIdent("prog"));
@@ -142,6 +149,7 @@ class HeizungssteuerungRegler extends IPSModule
 				$zp_conf = getValue($this->GetIDForIdent("ZP_Conf"));
 				$sws_abw = getValue($this->GetIDForIdent("SWS_Abw"));
 				$abw = getValue($this->GetIDForIdent("Abw"));
+				$z_abw = getValue($this->GetIDForIdent("Z_Abw"));
 				$this->ProgrammAuswahl();
            		}
 			if (($SenderID == $triggerIDAbw) && ($Message == 10603)){// && (boolval($Data[0]))){
@@ -149,6 +157,7 @@ class HeizungssteuerungRegler extends IPSModule
 				$zp_conf = getValue($this->GetIDForIdent("ZP_Conf"));
 				$sws_abw = getValue($this->GetIDForIdent("SWS_Abw"));
 				$abw = getValue($this->GetIDForIdent("Abw"));
+				$z_abw = getValue($this->GetIDForIdent("Z_Abw"));
 				$this->ProgrammAuswahl();
 				if($abw == false){
 					//IPS_SetHidden($VariabelID_Ab, false);
@@ -157,6 +166,13 @@ class HeizungssteuerungRegler extends IPSModule
 					$this->AbwesenheitsAuswahl();
 				}
            		}
+			if (($SenderID == $triggerIDZAbw) && ($Message == 10603)){// && (boolval($Data[0]))){
+				$sws = getValue($this->GetIDForIdent("SWS"));
+				$zp_conf = getValue($this->GetIDForIdent("ZP_Conf"));
+				$sws_abw = getValue($this->GetIDForIdent("SWS_Abw"));
+				$abw = getValue($this->GetIDForIdent("Abw"));
+				$z_abw = getValue($this->GetIDForIdent("Z_Abw"));
+				$this->ProgrammAuswahl();
         }
         /**
         * Die folgenden Funktionen stehen automatisch zur Verfügung, wenn das Modul über die "Module Control" eingefügt wurden.
@@ -167,13 +183,14 @@ class HeizungssteuerungRegler extends IPSModule
         */
 	
 	public function RequestAction($key, $value){
-		global $sws, $zp_conf, $sws_abw, $abw, $prog, $sw, $sw_abs, $sws_abw;
+		global $sws, $zp_conf, $sws_abw, $abw, $prog, $sw, $sw_abs, $sws_abw, $z_abw;
         	switch ($key) {
         		case 'SWS':
 				$sws = $value;
 				$zp_conf = getValue($this->GetIDForIdent("ZP_Conf"));
 				$sws_abw = getValue($this->GetIDForIdent("SWS_Abw"));
 				$abw = getValue($this->GetIDForIdent("Abw"));
+				$z_abw = getValue($this->GetIDForIdent("Z_Abw"));
 				$this->ProgrammAuswahl();
             		break;
 				
@@ -334,7 +351,7 @@ class HeizungssteuerungRegler extends IPSModule
 		
 	public function ProgrammAuswahl(){
 		
-		global $sws, $zp_conf, $sws_abw, $abw;
+		global $sws, $zp_conf, $sws_abw, $abw, $z_abw;
 		$alg_abw = getValue($this->GetIDForIdent("ALG_Abw"));
 		
 		if($sws == 0){
@@ -350,8 +367,7 @@ class HeizungssteuerungRegler extends IPSModule
 			IPS_SetDisabled($this->GetIDForIdent("prog"), true);
 			//echo "Auto";
 			
-			//if(($alg_abw == true) or ($abw == true && $sws_abw == true)){
-			if($abw == true && $sws_abw == true){
+			if(($abw == true && $sws_abw == true) or ($z_abw == true)){
 				SetValue($this->GetIDForIdent("prog"), 3);
 				IPS_SetDisabled($this->GetIDForIdent("prog"), true);
 				//echo "Abwesend";
@@ -375,7 +391,7 @@ class HeizungssteuerungRegler extends IPSModule
 	}
 	
 	public function SWRegler(){
-		global $prog, $sw, $sw_abs;
+		global $prog, $sw, $sw_abs, $z_abw;
 		$program = $prog;
 		$sollwert = $sw;
 		$sollwert_ab = $sw_abs;
@@ -423,7 +439,12 @@ class HeizungssteuerungRegler extends IPSModule
 			else if ($program == 3) {
 				$sollwert_ber = 18;
 				SetValue($this->GetIDForIdent("SB"), 0);
-				IPS_SetHidden($this->GetIDForIdent("SB"), true);
+				if($z_abw == true){
+					IPS_SetHidden($this->GetIDForIdent("SB"), false);
+				}
+				else{
+					IPS_SetHidden($this->GetIDForIdent("SB"), true);
+				}
 			}
 		
 		SetValue($this->GetIDForIdent("SW_ber"), $sollwert_ber);
