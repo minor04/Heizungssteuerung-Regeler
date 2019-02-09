@@ -183,7 +183,7 @@ class HeizungssteuerungRegler extends IPSModule
         */
 	
 	public function RequestAction($key, $value){
-		global $sws, $zp_conf, $sws_abw, $abw, $prog, $sw, $sw_abs, $sws_abw, $z_abw;
+		global $sws, $zp_conf, $sws_abw, $abw, $prog, $sw, $sw_abs, $z_abw;
         	switch ($key) {
         		case 'SWS':
 				$sws = $value;
