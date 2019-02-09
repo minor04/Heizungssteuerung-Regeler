@@ -442,9 +442,11 @@ class HeizungssteuerungRegler extends IPSModule
 				SetValue($this->GetIDForIdent("SB"), 0);
 				if($z_abw == true){
 					IPS_SetHidden($this->GetIDForIdent("SB"), false);
+					SetValue($this->GetIDForIdent("SB"), 4);
 				}
 				else{
 					IPS_SetHidden($this->GetIDForIdent("SB"), true);
+					SetValue($this->GetIDForIdent("SB"), 0);
 				}
 			}
 		
