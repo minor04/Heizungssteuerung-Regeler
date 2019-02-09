@@ -279,7 +279,7 @@ class HeizungssteuerungRegler extends IPSModule
 		$this->EnableAction("SW_Abs");
 		$this->EnableAction("SWS_Abw");
 		
-		IPS_SetHidden("Z_Abw", true);
+		IPS_SetHidden($this->GetIDForIdent("Z_Abw"), true);
 		
 	}
 		
