@@ -132,7 +132,7 @@ class HeizungssteuerungRegler extends IPSModule
         	}
 	
 	        public function MessageSink ($TimeStamp, $SenderID, $Message, $Data) {
-		global $sws, $zp_conf, $sws_abw, $abw, $prog, $sw, $sw_abs;
+		global $sws, $zp_conf, $sws_abw, $abw, $prog, $sw, $sw_abs, $z_abw;
             		$triggerIDProg = $this->ReadPropertyInteger("TrigProgramm");
 			$triggerIDConf = $this->ReadPropertyInteger("TrigConfort");
 			$triggerIDAbw = $this->ReadPropertyInteger("TrigAbwesend");
