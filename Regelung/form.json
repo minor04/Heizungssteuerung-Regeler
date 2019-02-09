@@ -4,6 +4,7 @@
 		{ "type": "SelectVariable", "name": "TrigProgramm", "caption": "Programm" },
 		{ "type": "SelectVariable", "name": "TrigConfort", "caption": "ZP Confort" },
 		{ "type": "SelectVariable", "name": "TrigAbwesend", "caption": "Abwesend" },
+		{ "type": "SelectVariable", "name": "TrigZentralAbwesend", "caption": "Zentral Abwesend" },
 		{ "type": "Label", "label": "Konfigurationsdaten für den Wetterdienst" },
 		{ "type": "ValidationTextBox", "name": "APIkey", "caption": "API Key" },
 		{ "type": "ValidationTextBox", "name": "Lat", "caption": "Latitude" },
