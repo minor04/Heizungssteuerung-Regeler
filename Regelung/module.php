@@ -173,6 +173,7 @@ class HeizungssteuerungRegler extends IPSModule
 				$abw = getValue($this->GetIDForIdent("Abw"));
 				$z_abw = getValue($this->GetIDForIdent("Z_Abw"));
 				$this->ProgrammAuswahl();
+			}
         }
         /**
         * Die folgenden Funktionen stehen automatisch zur Verfügung, wenn das Modul über die "Module Control" eingefügt wurden.
@@ -183,14 +184,14 @@ class HeizungssteuerungRegler extends IPSModule
         */
 	
 	public function RequestAction($key, $value){
-		global $sws, $zp_conf, $sws_abw, $abw, $prog, $sw, $sw_abs;
+		global $sws, $zp_conf, $sws_abw, $abw, $prog, $sw, $sw_abs, $z_abw;
         	switch ($key) {
         		case 'SWS':
 				$sws = $value;
 				$zp_conf = getValue($this->GetIDForIdent("ZP_Conf"));
 				$sws_abw = getValue($this->GetIDForIdent("SWS_Abw"));
 				$abw = getValue($this->GetIDForIdent("Abw"));
-				//$z_abw = getValue($this->GetIDForIdent("Z_Abw"));
+				$z_abw = getValue($this->GetIDForIdent("Z_Abw"));
 				$this->ProgrammAuswahl();
             		break;
 				
