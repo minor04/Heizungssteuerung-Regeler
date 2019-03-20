@@ -360,14 +360,19 @@ class HeizungssteuerungRegler extends IPSModule
 		if($sws == 0){
 			SetValue($this->GetIDForIdent("prog"), 0);
 			IPS_SetDisabled($this->GetIDForIdent("prog"), false);
+			IPS_SetHidden($this->GetIDForIdent("SWS_Abw"), true); 	//20.03.19
+			SetValue($this->GetIDForIdent("Abw"), false);		//20.03.19
 			//echo "Aus";
 		}
 		else if($sws == 1){
 			IPS_SetDisabled($this->GetIDForIdent("prog"), false);
+			IPS_SetHidden($this->GetIDForIdent("SWS_Abw"), true); 	//20.03.19
+			SetValue($this->GetIDForIdent("Abw"), false);		//20.03.19
 			//echo "Hand";
 		}
 		else{
 			IPS_SetDisabled($this->GetIDForIdent("prog"), true);
+			IPS_SetHidden($this->GetIDForIdent("SWS_Abw"), false); //20.03.19
 			//echo "Auto";
 			
 			if(($abw == true && $sws_abw == true) or ($z_abw == true)){
