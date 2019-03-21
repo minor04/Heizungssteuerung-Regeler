@@ -33,7 +33,7 @@ class HeizungssteuerungRegler extends IPSModule
 			if (!IPS_VariableProfileExists("Heizung_SWS")) {
 			
 				IPS_CreateVariableProfile("Heizung_SWS", 1); // 0 boolean, 1 int, 2 float, 3 string,
-				IPS_SetVariableProfileValues("Heizung_SWS", 0, 2, 1);
+				IPS_SetVariableProfileValues("Heizung_SWS", 0, 2, 0);
 				IPS_SetVariableProfileDigits("Heizung_SWS", 0);
 				IPS_SetVariableProfileAssociation("Heizung_SWS", 0, "Aus", "", 0xFFFFFF);
 				IPS_SetVariableProfileAssociation("Heizung_SWS", 1, "Hand", "", 0xFFFFFF);
@@ -360,14 +360,12 @@ class HeizungssteuerungRegler extends IPSModule
 		if($sws == 0){
 			SetValue($this->GetIDForIdent("prog"), 0);
 			IPS_SetDisabled($this->GetIDForIdent("prog"), false);
-			IPS_SetHidden($this->GetIDForIdent("SWS_Abw"), true); 	//20.03.19
-			//SetValue($this->GetIDForIdent("Abw"), false);		//20.03.19
+			//IPS_SetHidden($this->GetIDForIdent("SWS_Abw"), true); 	//20.03.19
 			//echo "Aus";
 		}
 		else if($sws == 1){
 			IPS_SetDisabled($this->GetIDForIdent("prog"), false);
-			IPS_SetHidden($this->GetIDForIdent("SWS_Abw"), true); 	//20.03.19
-			//SetValue($this->GetIDForIdent("Abw"), false);		//20.03.19
+			//IPS_SetHidden($this->GetIDForIdent("SWS_Abw"), true); 	//20.03.19
 			//echo "Hand";
 		}
 		else{
